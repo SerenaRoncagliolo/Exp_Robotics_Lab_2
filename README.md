@@ -44,7 +44,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-
+This system is built to simulate and environment where a human, a robot and a ball are spawned. The robot should follow three different behaviours: Normal, Sleep and Play. The robot is a wheeled dog having a camera located on top of its head. The human simulated represents the user that controls the movements of the ball within the environment. The human is not actually controlling the motion of the ball, since this last one is defined as a robot with one link capable of moving within the environment using speficic topics. The human can move the ball around, by giving a command position to reach, and make the ball disappear.
+The objective of this project was to modify the provided robot model by using additional links and joints, build a suitable ROS architecture to implement the robot’s behaviors and simulate the system behavior on Gazebo.
 
 ### Built With
 
@@ -61,6 +62,26 @@
 
 ### State Machine
 
+<p align="center">
+<a>
+    <img src="images/State_Machine.png" width="400" height="">
+</a>
+</p>
+The wheeled dog has three behaviors:
+ <ol>
+  <li> NORMAL BEHAVIOR: when the robot assumes this behavior, it starts moving randomly within the environment. The robot goes from the normal behavior to the play behavior when he sees the ball within the environment. Otherwise, when it is moving, the sleep timer is activated and the robot should assume SLEEP behavior;</li>
+  <li> SLEEP BEHAVIOR: the robot moves to a predefined position which indicates "home position" and stops there for a given time interval. After a certain time, it should "wake up" and assume NORMAL behavior; </li>
+  <li> PLAY BEHAVIOR: 
+      <ol>
+        <li> It starts following the ball; </li>
+        <li> when the ball stops, it moves the head to the left of 45 degrees, it keeps the head in that position for a number of seconds, then it moves the head on the right, it keeps it there for a number of seconds, then again it moves it to the center.</li>
+        <li> Move to new target; </li>
+       <li> Once it moved the head, it keeps tracking the ball until it stops again. </li>
+     </ol> 
+    The robot goes back in the normal behavior when it cannot find the ball for a certain amount of time.
+    </li>
+ </ol> 
+
 ### ROS Topics
 
 ### ROS Messages
@@ -68,6 +89,12 @@
 ### Rqt_graphs 
 
 ## Repository Organization
+The repository contains the following folders:
+* **world**: it contains the world used for implementing the simulation;
+* **urdf**: it contains the description of a robot model, a human and a ball;
+* **scripts**: it contains the python ROS node which implement an action server to move the ball around;
+* **action**: it contains the definition of a custom action message;
+* **launch**: it contains the launch file for executing the simulation;
 
 ## Prerequisites
 
