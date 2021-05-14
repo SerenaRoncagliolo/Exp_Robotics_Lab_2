@@ -12,7 +12,7 @@
     <img src="images/logo_orizzontale_COLORE.png" width="400" height="">
   </a>
 
-  <h3 align="center">Assignment 1 - Behavioural Architecture</h3>
+  <h3 align="center">Assignment 2 - Behavioural Architecture</h3>
 </p> 
 
 
