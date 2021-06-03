@@ -30,6 +30,7 @@
       <a href="#software-architecture">Software Architecture</a>
       <ul>
         <li><a href="#components-architecture">Components Architecture</a></li>
+        <li><a href="#action-servers">Action Servers</a></li>
         <li><a href="#state-machine">State Machine</a></li>
         <li><a href="#ros-topics">ROS Topics</a></li>
         <li><a href="#ros-messages">ROS Messages</a></li>
@@ -81,6 +82,11 @@ The objective of this project was to modify the provided robot model by using ad
 * **Behavior Command Manager:** this component simulate the Finite State Machine (FSM) and control the switching between the robot behaviors: Normal, Sleep and Play; this component subscribe to the /ball_detected topic to switch between Normal to Play and to the /home_reached topic to switch between Sleep and Normal; it publishes the new behavior as a ROS message on the topic /behavior. The different behavior are explained later in this report.
 * **Motion:** this component moves the robot when it assumes behavior Normal or Sleep; it subscribes to the /behaviour topic in order operate according to the behavior given; it also instantiate a SimpleActionClient which communicates with the _Go To Point Robot_ Action Server in order to send the correct goal position the robot has to reach; when the robot is found in Normal state, it makes it move randomly, by choosing a random goal position within the environment and waits for the Server to report if the robot has reached the goal; in the Sleep state, instead, the motion controller moves the robot to _home position_ and when it's reached, it report it to the Behavior Controller.
 * **OpenCv Ball Tracking:** it make use of the OpenCv library to detect the ball within the environment, so that the robot can follow it in Play behavior; it subscribes to the robot camera topic; when the ball is detected, it publishes on the /ball_detected topic, this way the behavior controller can switch the behavior from Normal to ; when the robot switch to Play behavior, the component pushlishes on the topic /robot/cmd_vel the velocity to apply to the model in Gazebo; the robot should stop when the ball stop, thus the tracking is stopped as well, the robot rotates its head and then, when it returns to its default position, the tracking starts again.
+* **Human Interface Simulator:** this componet is used to send a goal positions to the ball, using a SimpleActionClient which is stopped until the goal is reached, then, it sleeps for a random number of seconds so that the ball can remain still; it can randomly send a goal position to the ball within the environment or make it disappear by moving it underground.
+
+### Action Servers
+* **Go To Point Robot:** it's connected to the Motion controller, from which it receives a goal and publish the acconding velocity to the /robot/cmd_vel topic; when the goal is reached, it sends back a feedbacks message to the Motion controller; it can performs the following: a) adjust the robot yaw so that it can reach the goal, b) make sure the robot moves straight c) stop then robot when the goal is reached.
+* **Go To Point Ball:**  it controls instead the ball movement by publishing and controlling only its linear velocities along x, y and z; it can performs the following: a) move the robot towards the goal b) stop the robot when the goal is reached.
 
 ### State Machine
 
