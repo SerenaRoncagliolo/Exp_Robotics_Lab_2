@@ -18,7 +18,7 @@
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
-  <summary>Table of Contents</summary>
+  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -27,15 +27,28 @@
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#software-architecture">Software Architecture</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#components-architecture">Components Architecture</a></li>
+        <li><a href="#state-machine">State Machine</a></li>
+        <li><a href="#ros-topics">ROS Topics</a></li>
+        <li><a href="#ros-messages">ROS Messages</a></li>
+        <li><a href="#rqt">Rqt_graphs</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#repository-organization">Repository Organization</a></li>
+    <li><a href="#prerequisites">Prerequisites</a></li>
+    <ul>
+        <li><a href="#ros">ROS</a></li>
+        <li><a href="#python">Python</a></li>
+     </ul>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#working-hypo">Working hypothesis and environment</a></li>
+    <ul>
+        <li><a href="#system-features">System's features</a></li>
+        <li><a href="#system-limitations">System's limitations</a></li>
+        <li><a href="#future-work">Future work</a></li>
+    </ul>
   </ol>
 </details>
 
@@ -54,11 +67,20 @@ The objective of this project was to modify the provided robot model by using ad
 * [SMACH](http://wiki.ros.org/smach)
 
 
-## Software  Architecture
+## Software Architecture
 
 ### Components Architecture
 
+<p align="center">
+<a>
+    <img src="images/draft_architecture.png" width="600" height="">
+</a>
+</p>
+
 **Components**  
+* **Behavior Command Manager:** this component simulate the Finite State Machine (FSM) and control the switching between the robot behaviors: Normal, Sleep and Play; this component subscribe to the /ball_detected topic to switch between Normal to Play and to the /home_reached topic to switch between Sleep and Normal; it publishes the new behavior as a ROS message on the topic /behavior. The different behavior are explained later in this report.
+* **Motion:** this component moves the robot when it assumes behavior Normal or Sleep; it subscribes to the /behaviour topic in order operate according to the behavior given; it also instantiate a SimpleActionClient which communicates with the _Go To Point Robot_ Action Server in order to send the correct goal position the robot has to reach; when the robot is found in Normal state, it makes it move randomly, by choosing a random goal position within the environment and waits for the Server to report if the robot has reached the goal; in the Sleep state, instead, the motion controller moves the robot to _home position_ and when it's reached, it report it to the Behavior Controller.
+* **OpenCv Ball Tracking:** it make use of the OpenCv library to detect the ball within the environment, so that the robot can follow it in Play behavior; it subscribes to the robot camera topic; when the ball is detected, it publishes on the /ball_detected topic, this way the behavior controller can switch the behavior from Normal to ; when the robot switch to Play behavior, the component pushlishes on the topic /robot/cmd_vel the velocity to apply to the model in Gazebo; the robot should stop when the ball stop, thus the tracking is stopped as well, the robot rotates its head and then, when it returns to its default position, the tracking starts again.
 
 ### State Machine
 
