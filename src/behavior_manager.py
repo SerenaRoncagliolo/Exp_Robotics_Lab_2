@@ -15,15 +15,8 @@ import time
 import random
 
 from std_msgs.msg import String # needed for subscribing strings
-from std_msgs.msg import Int32 # needed for publishing integers
-from first_assignment.msg import IntArray # needed to publish/subscribe [x,y] describing the position of the robot
-from map2Dclass import Map2D # class to simulate map of the environment
+from std_msgs.msg import Bool # needed for subscribing booleans
 
-## global variables
-random_time = 0.5 
-
-## object Map2D, we need it to access the values describing the map 2D within which the robot is moving 
-map_2D = Map2D()
 
 ## publisher pub_behavior
 #
@@ -31,71 +24,84 @@ map_2D = Map2D()
 # the queue_size argument limits the amount of queued messages if any subscriber is not receiving them fast enough.
 pub_behavior = rospy.Publisher('/behavior', String, queue_size=10)
 
+## subscriber sub_at_home
+#
+# subscriber to check position
+sub_at_home = None
+
 
 
 ## class Normal_behavior
 #
 # This class implement the NORMAL behaviour of the robot pet
-# The robot moves randomly within the map 
-# - If it receives a "play" command the FSM should go into PLAY state 
-# - If the sleep timer is triggered the FSM should go into SLEEP state
+# The robot moves randomly within the Gazebo arena
+# - If it receives a "play" command the FSM should go into PLAY state (start_play)
+# - If the sleep timer is triggered the FSM should go into SLEEP state (start_sleep)
 class Normal_behavior(smach.State):
 	## method init
 	#
-	# it initializes the state class
+	# This method should:
+	# 	- initializes the state class
 	def __init__(self):
 		smach.State.__init__(self, 
 		                     outcomes=['start_sleep','start_play']
 		                    )	
 		# initialize boolean for checking voice command received or not	
-		self.play_command_received = False 
+		self.ball_visible = False 
 		 # Loop 100Hz
 		self.rate = rospy.Rate(1) 
-		rospy.Subscriber("/voice_command", String, self.get_command)
+
 	## method execute
 	#
 	# - publish "normal" (String) on the topic behavior
-	# - check if a voice command is received from the user
-	# - if the command is received:
+	# - check if the ball in the arena is seen by the robot
+	# - if the ball is visible:
 	#	- goes into PLAY state
-	# - else
-	#	- trigger sleeping timer at random time
-	#	- goes into SLEEP state
 	def execute(self, userdata):
+		rospy.loginfo("NODE BEHAVIOR_MANAGER: publish normal behavior")
 		pub_behavior.publish("normal") 
-		# self.counter = random.randint(1,2) 
-		## check if the user command is received, subscribe to the topic voice_command on which voice_command.py publishes "play"
-		while not rospy.is_shutdown():
-			# if command play received
-			# check if boolean play_command_received is True
-			## wait random time
-			rospy.sleep(random_time*random.randint(5,30))
-			if(random.randint(1,6) == 5):
-				return 'start_sleep' 			
-			else:
-				if(self.play_command_received):
-					self.play_command_received = False
-					return 'start_play'
-			self.rate.sleep()
-	## method get_command
-	#
-	# method to get the voice command
-	def get_command(self, command):
-		if(command.data == "play"):
-			self.play_command_received = True
 
+		## check if the ball is visible to the robot
+		rospy.Subscriber("/ball_visible", Bool, self.ball_tracking)
+		
+		# seconds counter
+		seconds_counter = 0
+		
+		# get current time to compute a random interval from the istant
+		# in which the robot entered normal state
+		start_time = rospy.Time.now()
+		
+		while not rospy.is_shutdown():
+			
+			## compute how long the robot stays in Normal state 
+			if seconds_counter == 1: 
+				current_time = rospy.Time.now()
+			seconds_counter += 1
+			current_time = rospy.Time.now()
+			# compute how long it stays in normal time
+			tot_time_given = current_time.secs - start_time.secs	
+			if(self.ball_visible):
+				## the robot sees the ball it should enter Play behavior
+				return 'start_play'
+			elif(random.randint(1,100) == 1 and tot_time_given > 30):
+				## the robot goes to sleep at random time
+				return 'start_sleep'
+			self.rate.sleep()				
+			
+	## method ball_tracking
+	#
+	# method to check if the ball is visible to the robot or not
+	def ball_tracking(self, ball):
+		self.ball_visible = ball.data
 							
 			
 ## class Sleep_behavior
 #
 # This class implement the SLEEP behaviour of the robot pet
 # The robot sleeps (SLEEP state)for a random period of time, then it moves to NORMAL state
-## class Sleep_behavior
-#
-# This class implement the SLEEP behaviour of the robot pet
 # The robot should:
-#	- reach a predefined location
-#	- stays there for some times
+#	- reach a predefined location within the arena in Gazebo
+#	- stays there for some times 
 #	- goes back in NORMAL state
 class Sleep_behavior(smach.State):
 	## method init
@@ -105,39 +111,51 @@ class Sleep_behavior(smach.State):
 		smach.State.__init__(self, 
                              outcomes=['stop_sleep']
                             )
-		self.rate = rospy.Rate(1)
-		self.position = [-1,-1] # initialise position
+		self.at_home = False # initialize boolean variable to check if at home or not
+		self.rate = rospy.Rate(20)
+		
 	## method execute
 	#
+	# This method should
 	# - publish "sleep" (String) on the topic behavior
-	# - publish actual position (IntArray [x,y]) of the robot, so that the motion node can check if the robot is already at home or not
+	# - check if the robot is already at home position or not
 	def execute(self, userdata):
 		rospy.loginfo("NODE BEHAVIOR_MANAGER: publish sleep behavior")
 		pub_behavior.publish("sleep") 
-		# when "sleep" is published on the topic behavior, the node motion should subscribe to it 
-		# and send the robot at the home position
+		
+		# when "sleep" is published on the topic behavior, the node motion should 
+		# subscribe to it and send the robot at the home position
+		# it now subscribe to Motion to check if it is at home
 		# to check if it's already at home position we read the actual position of the robot
-		rospy.Subscriber("/actual_position_robot", IntArray, self.read_actual_position)
+		rospy.Subscriber("/at_home", Bool, self.check_if_home_position)
 		# we call the callback read_actual_position to save the values in self.position 
 		while not rospy.is_shutdown():  
-			# check it at home position [xhome, yhome]
-			#if(self.position == (map_2D.x_home,map_2D.y_home)):
-			## it should sleep for some time
-			rospy.loginfo('NODE BEHAVIOR: Wait some time to wake up')
-			rospy.sleep(random_time*random.randint(1,15))
-			return 'stop_sleep'
+			# check if it is in home position
+			if(self.at_home):
+				# make it sleep for some time, rospy.sleep()
+				rospy.loginfo('NODE BEHAVIOR: Wait some time to wake up')
+				rospy.sleep(random.randint(20,35))
+				self.at_home = False
+				# exit sleep state
+				return 'stop_sleep'
 		self.rate.sleep
 	## method read_actual_position
 	#
    	# subscriber to actual_position_robot topic callback, it reads the actual position of the robot
-   	def read_actual_position(self,position):
-		self.position = position.data
+   	def check_if_home_position(self, at_home):
+		self.at_home = at_home.data
 
 ## class Play_behavior
 #
 # This class implement the PLAY behavior of the robot pet
-#
 # It moves the robot to the predefined (X, Y) location within the map and moves it back to the user.
+# The Robot should:
+#	- start following the ball
+#	- when the ball stops (it means when the robot stops)
+#	  it moves the head on the left of 45 degrees, and keep it there for some seconds
+#	- then it moves the head to the right, stays there for some seconds
+#	- once moved the head keeps tracking the ball
+
 class Play_behavior(smach.State):
 	## method init
 	#
@@ -146,43 +164,53 @@ class Play_behavior(smach.State):
 		smach.State.__init__(self, 
 		                     outcomes=['stop_play']
 		                    )
+		self.ball_visible = False
 		self.rate = rospy.Rate(1)  
-		self.position = [-1,-1]
-		
+		self.counter = 0
+
 	## method execute
 	#
-	# The robot should:
-	#	- go to the location where the person is
-	#	- wait for a pointing gesture
-	#	- go in the pointed location
-	# 	- go back to the user
-	# 	- wait for the next pointing gestures
-	# 	- after some time return to NORMAL state
+	# what the robot should do
 
 	def execute(self, userdata):
 		# publish behavior "play" on the topic \behavior
+		rospy.loginfo("NODE BEHAVIOR_MANAGER: publish play behavior")
 		pub_behavior.publish("play") 
-		# the topic is subscribed by the node poiting gesture, which send the robot to the user location
-		# motion read the goal position from the poiting gesture which keeps publishing 
-		# check the actual position of the robot
-		rospy.Subscriber("/actual_position_robot", IntArray, self.read_actual_position)
-		# wait some random time
-		rospy.sleep(random_time*random.randint(30,80))
-		return 'stop_play'
-	## method read_actual_position
-	#
-   	# subscriber to actual_position_robot topic callback, it reads the actual position of the robot
-   	def read_actual_position(self,position):
-		self.position = position.data
 
+		# the topic is subscribed to the ball tracking
+		rospy.Subscriber("/ball_visible", Bool, self.read_ball_detection)
+		
+		while not rospy.is_shutdown():
+			# check if the ball is visible or not
+			if not self.ball_visible:
+				rospy.loginfo("NODE BEHAVIOR_MANAGER: searching the ball. Seconds taken:"+str(self.counter)+" seconds")
+				# we let the robot look for it for up to 15 seconds 
+				if self.counter > 15:
+                    			return 'stop_play'
+			elif(self.ball_visible):
+				self.counter = 0
+				
+	## method read_ball_detection
+	#
+	# subscriber callback to find the ball 
+	def read_ball_detection(self,ball):
+			self.ball_visible = ball.data
+
+## function main
+#
+# state machine 
 def main():
 	rospy.init_node("behavior_manager")
+	
+	# initialization of the sys
+	rospy.sleep(2)	
 
 	## Create state machine	
 	sm = smach.StateMachine(outcomes=['container_interface'])
+	
 	## machine container
 	with sm:
-	## add states to the container,
+		## add states to the container,
 		smach.StateMachine.add('NORMAL', Normal_behavior(), transitions={'start_sleep':'SLEEP','start_play':'PLAY'})
 		smach.StateMachine.add('SLEEP', Sleep_behavior(), transitions={'stop_sleep':'NORMAL'})	
  		smach.StateMachine.add('PLAY', Play_behavior(), transitions={'stop_play':'NORMAL'})	

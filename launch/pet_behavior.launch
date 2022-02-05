@@ -1,0 +1,17 @@
+
+<launch>
+    <param name="home_x" value="-5" />
+    <param name="home_y" value="7" />
+
+    <node pkg="exp_assignment2" type="motion.py" name="motion" output="screen">
+    </node>
+
+    <node pkg="exp_assignment2" type="human_simulator.py" name="human_simulator" output="screen">
+    </node>
+
+    <node pkg="exp_assignment2" type="behavior_manager.py" name="behavior_manager" output="screen">
+    </node>
+
+     <node pkg="exp_assignment2" type="opencv_tracking.py" name="opencv_tracking" output="screen">
+    </node>
+</launch>

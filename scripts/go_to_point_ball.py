@@ -39,7 +39,9 @@ act_s = None
 
 # callbacks
 
-
+## function clbk_odom
+#
+# callback function dedicated to the odometry of the robot
 def clbk_odom(msg):
     global position_
     global pose_
@@ -49,13 +51,17 @@ def clbk_odom(msg):
     position_ = msg.pose.pose.position
     pose_ = msg.pose.pose
 
-
+## function change_state
+#
+# function which changes the state while the robot moves until it reaches the goal
 def change_state(state):
     global state_
     state_ = state
     print ('State changed to [%s]' % state_)
 
-
+## function go_straight_ahead
+#
+# function which moves the ball straight to the goal
 def go_straight_ahead(des_pos):
     global pub, state_, z_back
     err_pos = math.sqrt(pow(des_pos.y - position_.y, 2) +
@@ -90,14 +96,18 @@ def go_straight_ahead(des_pos):
         print ('Position error: [%s]' % err_pos)
         change_state(1)
 
-
+## function done
+#
+# it set the ball velocities to zero
 def done():
     twist_msg = Twist()
     twist_msg.linear.x = 0
     twist_msg.linear.y = 0
     pub.publish(twist_msg)
 
-
+## function planning
+#
+# function which computes what the ball should do
 def planning(goal):
 
     global state_, desired_position_
@@ -139,9 +149,12 @@ def planning(goal):
         rospy.loginfo('Goal: Succeeded!')
         act_s.set_succeeded(result)
 
-
+## function main
+#
 def main():
+    # variables
     global pub, active_, act_s, pubz
+
     rospy.init_node('go_to_point')
     pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
     pubz = rospy.Publisher('/gazebo/set_link_state', LinkState, queue_size=1)
