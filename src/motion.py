@@ -50,10 +50,10 @@ def callback_get_behaviour(data):
 	global behaviour 
 	behaviour = data.data
 
-## function callback_send_goal
+## function feedback_cb
 #
-# callback to send_goal function
-def callback_send_goal(check):
+# callback to send goal
+def feedback_cb(check):
 	robot_in_target = False
 	if check.stat == "Target position reached":
 		robot_in_target = True
