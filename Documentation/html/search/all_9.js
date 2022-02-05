@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ub_5fa',['ub_a',['../namespacego__to__point__ball.html#aa5173a26f3502ea035d7c563bbf1fb05',1,'go_to_point_ball']]],
-  ['ub_5fd',['ub_d',['../namespacego__to__point__ball.html#a1dabe6f24f898fa6f5303959917de757',1,'go_to_point_ball']]]
+  ['kp_5fa',['kp_a',['../namespacego__to__point__ball.html#aac67ecb6c41141092b1ccaba4b537afc',1,'go_to_point_ball.kp_a()'],['../namespacego__to__point__robot.html#ab9bae8b08a7c50f11e55e3fae44f7777',1,'go_to_point_robot.kp_a()']]],
+  ['kp_5fd',['kp_d',['../namespacego__to__point__ball.html#aeb49969b88b7ca77d9abdeae42cb1964',1,'go_to_point_ball.kp_d()'],['../namespacego__to__point__robot.html#afaac446f10588cd97bfda3bf31c3b670',1,'go_to_point_robot.kp_d()']]]
 ];

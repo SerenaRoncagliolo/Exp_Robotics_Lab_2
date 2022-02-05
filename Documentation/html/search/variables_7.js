@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['yaw_5f',['yaw_',['../namespacego__to__point__ball.html#a74d8ca28c507d35baf1ea8e8f9595a78',1,'go_to_point_ball']]],
-  ['yaw_5fprecision_5f',['yaw_precision_',['../namespacego__to__point__ball.html#acc228d72c1ee47a43061e3563ac20d5c',1,'go_to_point_ball']]],
-  ['yaw_5fprecision_5f2_5f',['yaw_precision_2_',['../namespacego__to__point__ball.html#a1985c69cf8534ba0bd2c6080f788a992',1,'go_to_point_ball']]]
+  ['lb_5fa',['lb_a',['../namespacego__to__point__ball.html#ae6440cb2a8ea6e8e7d2327cb4cd12dd3',1,'go_to_point_ball.lb_a()'],['../namespacego__to__point__robot.html#a0a5daf54d4f98b8898f69fc331bcc1f0',1,'go_to_point_robot.lb_a()']]]
 ];

@@ -1,0 +1,39 @@
+\hypertarget{motion_8py}{}\section{/home/my\+\_\+ros/src/exp\+\_\+assignment2/scripts/motion.py File Reference}
+\label{motion_8py}\index{/home/my\+\_\+ros/src/exp\+\_\+assignment2/scripts/motion.\+py@{/home/my\+\_\+ros/src/exp\+\_\+assignment2/scripts/motion.\+py}}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacemotion}{motion}
+\begin{DoxyCompactList}\small\item\em It moves the robot within the Gazebo environment according to the given behavior. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacemotion_af838e21dbf42903e9919b1b9263e306c}{motion.\+get\+\_\+random\+\_\+position} ()
+\begin{DoxyCompactList}\small\item\em function random position on map \end{DoxyCompactList}\item 
+def \hyperlink{namespacemotion_a223e65905edcd5f4605198efb23d2ca3}{motion.\+callback\+\_\+get\+\_\+behaviour} (data)
+\begin{DoxyCompactList}\small\item\em function callback\+\_\+get\+\_\+behavior \end{DoxyCompactList}\item 
+def \hyperlink{namespacemotion_a4d516c2d2b3bec18bb4c6faf73e38fc8}{motion.\+feedback\+\_\+cb} (check)
+\begin{DoxyCompactList}\small\item\em function feedback\+\_\+cb \end{DoxyCompactList}\item 
+def \hyperlink{namespacemotion_ad19c84db008ed0163c8122d570d026e2}{motion.\+move\+\_\+random\+\_\+normal} ()
+\begin{DoxyCompactList}\small\item\em function move\+\_\+random\+\_\+normal \end{DoxyCompactList}\item 
+def \hyperlink{namespacemotion_a7e28371ac015cdd23c39095626abce98}{motion.\+move\+\_\+sleep\+\_\+position} ()
+\begin{DoxyCompactList}\small\item\em function move\+\_\+sleep\+\_\+position \end{DoxyCompactList}\item 
+def \hyperlink{namespacemotion_ad6289fca8572f5af95fd28f4c2dbc68d}{motion.\+main} ()
+\begin{DoxyCompactList}\small\item\em main function \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespacemotion_a9f9cd0f38a0aad33b5304b4edef120cd}{motion.\+V\+E\+R\+B\+O\+SE} = False
+\item 
+\hyperlink{namespacemotion_a15d63b2a70ac940f179085ce72871c86}{motion.\+behaviour} = None
+\begin{DoxyCompactList}\small\item\em global variables initialize behavior \end{DoxyCompactList}\item 
+list \hyperlink{namespacemotion_aa995e8257b20bb286a59bf6bb3c5f375}{motion.\+home\+\_\+position} = \mbox{[}rospy.\+get\+\_\+param(\textquotesingle{}home\+\_\+x\textquotesingle{}), rospy.\+get\+\_\+param(\textquotesingle{}home\+\_\+y\textquotesingle{})\mbox{]}
+\item 
+\hyperlink{namespacemotion_ae8b88cad0f3d7ca1b77eb860276cc939}{motion.\+goal\+Pos} = Planning\+Action\+Goal()
+\item 
+\hyperlink{namespacemotion_aba6af569cf57bbdc8a1d01598d29d99b}{motion.\+act\+\_\+c} = None
+\item 
+\hyperlink{namespacemotion_a53c0565e9a198f8fa203ac95f441255b}{motion.\+publisher\+Home} = rospy.\+Publisher(\char`\"{}/at\+\_\+home\char`\"{}, Bool, queue\+\_\+size=1)
+\item 
+bool \hyperlink{namespacemotion_a30e58643e988d1faddb84cdfd54965f8}{motion.\+at\+\_\+home} = False
+\end{DoxyCompactItemize}

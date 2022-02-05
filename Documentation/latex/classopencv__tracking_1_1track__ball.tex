@@ -1,0 +1,140 @@
+\hypertarget{classopencv__tracking_1_1track__ball}{}\section{opencv\+\_\+tracking.\+track\+\_\+ball Class Reference}
+\label{classopencv__tracking_1_1track__ball}\index{opencv\+\_\+tracking.\+track\+\_\+ball@{opencv\+\_\+tracking.\+track\+\_\+ball}}
+
+
+class \hyperlink{classopencv__tracking_1_1track__ball}{track\+\_\+ball}  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classopencv__tracking_1_1track__ball_aab7d9901f59d6877955a8d9fbeb1dc0e}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\begin{DoxyCompactList}\small\item\em method {\bfseries init} \end{DoxyCompactList}\item 
+def \hyperlink{classopencv__tracking_1_1track__ball_a3f89b28f29c4855aaf8bef0df281c2ef}{get\+\_\+behavior} (self, state)
+\begin{DoxyCompactList}\small\item\em method get\+\_\+behavior \end{DoxyCompactList}\item 
+def \hyperlink{classopencv__tracking_1_1track__ball_a97b88b8814e8df768a2a80c9e50b73d0}{follow\+\_\+ball} (self)
+\begin{DoxyCompactList}\small\item\em method follow\+\_\+ball \end{DoxyCompactList}\item 
+def \hyperlink{classopencv__tracking_1_1track__ball_ad0eefbf72841665b36372a1487f54960}{callback} (self, ros\+\_\+data)
+\begin{DoxyCompactList}\small\item\em method callback\+\_\+sub \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classopencv__tracking_1_1track__ball_a92050fb578b1e2e7bea37b0abdbf26aa}{center}
+\begin{DoxyCompactList}\small\item\em cv2 conversion \end{DoxyCompactList}\item 
+\hyperlink{classopencv__tracking_1_1track__ball_ae497b649948b1e33fb3cc71b01646da3}{radius}
+\item 
+\hyperlink{classopencv__tracking_1_1track__ball_a2fd263ce72f097474d63022a51a1aff9}{ball\+\_\+visible}
+\item 
+\hyperlink{classopencv__tracking_1_1track__ball_a0cef778dc02f2169211f2e756d94db7b}{ball\+\_\+stop}
+\item 
+\hyperlink{classopencv__tracking_1_1track__ball_a38f20351ab0571002f7552aed7bb6979}{near\+\_\+ball}
+\item 
+\hyperlink{classopencv__tracking_1_1track__ball_ace82efcb5e44b826ac65d61642b447a8}{behaviour}
+\item 
+\hyperlink{classopencv__tracking_1_1track__ball_a09ab81e992a70d22568ed1f6c556d1bb}{vel\+\_\+pub}
+\item 
+\hyperlink{classopencv__tracking_1_1track__ball_ad351c91525368a89ff0a7bb1d257b3d1}{publisher\+Ball}
+\item 
+\hyperlink{classopencv__tracking_1_1track__ball_aaefd39e73e7ee6f26d43bd19d6eaedaf}{cam\+\_\+sub}
+\item 
+\hyperlink{classopencv__tracking_1_1track__ball_aab7a7dae7030c9b39e7bfc1d892b5720}{behavior}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+class \hyperlink{classopencv__tracking_1_1track__ball}{track\+\_\+ball} 
+
+used to track the ball moving in the environment it makes use of cv2 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+(self)}{__init__(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def opencv\+\_\+tracking.\+track\+\_\+ball.\+\_\+\+\_\+init\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\hypertarget{classopencv__tracking_1_1track__ball_aab7d9901f59d6877955a8d9fbeb1dc0e}{}\label{classopencv__tracking_1_1track__ball_aab7d9901f59d6877955a8d9fbeb1dc0e}
+
+
+method {\bfseries init} 
+
+initialization of the class 
+
+\subsection{Member Function Documentation}
+\index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!callback@{callback}}
+\index{callback@{callback}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{callback(self, ros\+\_\+data)}{callback(self, ros_data)}}]{\setlength{\rightskip}{0pt plus 5cm}def opencv\+\_\+tracking.\+track\+\_\+ball.\+callback (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{ros\+\_\+data}
+\end{DoxyParamCaption}
+)}\hypertarget{classopencv__tracking_1_1track__ball_ad0eefbf72841665b36372a1487f54960}{}\label{classopencv__tracking_1_1track__ball_ad0eefbf72841665b36372a1487f54960}
+
+
+method callback\+\_\+sub 
+
+callback function of topic subscribed we use it to read information on the detection and the converted image \index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!follow\+\_\+ball@{follow\+\_\+ball}}
+\index{follow\+\_\+ball@{follow\+\_\+ball}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{follow\+\_\+ball(self)}{follow_ball(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def opencv\+\_\+tracking.\+track\+\_\+ball.\+follow\+\_\+ball (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\hypertarget{classopencv__tracking_1_1track__ball_a97b88b8814e8df768a2a80c9e50b73d0}{}\label{classopencv__tracking_1_1track__ball_a97b88b8814e8df768a2a80c9e50b73d0}
+
+
+method follow\+\_\+ball 
+
+method to set the robot velocity so that it can follow the ball \index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!get\+\_\+behavior@{get\+\_\+behavior}}
+\index{get\+\_\+behavior@{get\+\_\+behavior}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{get\+\_\+behavior(self, state)}{get_behavior(self, state)}}]{\setlength{\rightskip}{0pt plus 5cm}def opencv\+\_\+tracking.\+track\+\_\+ball.\+get\+\_\+behavior (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{state}
+\end{DoxyParamCaption}
+)}\hypertarget{classopencv__tracking_1_1track__ball_a3f89b28f29c4855aaf8bef0df281c2ef}{}\label{classopencv__tracking_1_1track__ball_a3f89b28f29c4855aaf8bef0df281c2ef}
+
+
+method get\+\_\+behavior 
+
+subscriber callback to the behavior topi 
+
+\subsection{Member Data Documentation}
+\index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!ball\+\_\+stop@{ball\+\_\+stop}}
+\index{ball\+\_\+stop@{ball\+\_\+stop}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{ball\+\_\+stop}{ball_stop}}]{\setlength{\rightskip}{0pt plus 5cm}opencv\+\_\+tracking.\+track\+\_\+ball.\+ball\+\_\+stop}\hypertarget{classopencv__tracking_1_1track__ball_a0cef778dc02f2169211f2e756d94db7b}{}\label{classopencv__tracking_1_1track__ball_a0cef778dc02f2169211f2e756d94db7b}
+\index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!ball\+\_\+visible@{ball\+\_\+visible}}
+\index{ball\+\_\+visible@{ball\+\_\+visible}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{ball\+\_\+visible}{ball_visible}}]{\setlength{\rightskip}{0pt plus 5cm}opencv\+\_\+tracking.\+track\+\_\+ball.\+ball\+\_\+visible}\hypertarget{classopencv__tracking_1_1track__ball_a2fd263ce72f097474d63022a51a1aff9}{}\label{classopencv__tracking_1_1track__ball_a2fd263ce72f097474d63022a51a1aff9}
+\index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!behavior@{behavior}}
+\index{behavior@{behavior}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{behavior}{behavior}}]{\setlength{\rightskip}{0pt plus 5cm}opencv\+\_\+tracking.\+track\+\_\+ball.\+behavior}\hypertarget{classopencv__tracking_1_1track__ball_aab7a7dae7030c9b39e7bfc1d892b5720}{}\label{classopencv__tracking_1_1track__ball_aab7a7dae7030c9b39e7bfc1d892b5720}
+\index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!behaviour@{behaviour}}
+\index{behaviour@{behaviour}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{behaviour}{behaviour}}]{\setlength{\rightskip}{0pt plus 5cm}opencv\+\_\+tracking.\+track\+\_\+ball.\+behaviour}\hypertarget{classopencv__tracking_1_1track__ball_ace82efcb5e44b826ac65d61642b447a8}{}\label{classopencv__tracking_1_1track__ball_ace82efcb5e44b826ac65d61642b447a8}
+\index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!cam\+\_\+sub@{cam\+\_\+sub}}
+\index{cam\+\_\+sub@{cam\+\_\+sub}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{cam\+\_\+sub}{cam_sub}}]{\setlength{\rightskip}{0pt plus 5cm}opencv\+\_\+tracking.\+track\+\_\+ball.\+cam\+\_\+sub}\hypertarget{classopencv__tracking_1_1track__ball_aaefd39e73e7ee6f26d43bd19d6eaedaf}{}\label{classopencv__tracking_1_1track__ball_aaefd39e73e7ee6f26d43bd19d6eaedaf}
+\index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!center@{center}}
+\index{center@{center}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{center}{center}}]{\setlength{\rightskip}{0pt plus 5cm}opencv\+\_\+tracking.\+track\+\_\+ball.\+center}\hypertarget{classopencv__tracking_1_1track__ball_a92050fb578b1e2e7bea37b0abdbf26aa}{}\label{classopencv__tracking_1_1track__ball_a92050fb578b1e2e7bea37b0abdbf26aa}
+
+
+cv2 conversion 
+
+\index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!near\+\_\+ball@{near\+\_\+ball}}
+\index{near\+\_\+ball@{near\+\_\+ball}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{near\+\_\+ball}{near_ball}}]{\setlength{\rightskip}{0pt plus 5cm}opencv\+\_\+tracking.\+track\+\_\+ball.\+near\+\_\+ball}\hypertarget{classopencv__tracking_1_1track__ball_a38f20351ab0571002f7552aed7bb6979}{}\label{classopencv__tracking_1_1track__ball_a38f20351ab0571002f7552aed7bb6979}
+\index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!publisher\+Ball@{publisher\+Ball}}
+\index{publisher\+Ball@{publisher\+Ball}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{publisher\+Ball}{publisherBall}}]{\setlength{\rightskip}{0pt plus 5cm}opencv\+\_\+tracking.\+track\+\_\+ball.\+publisher\+Ball}\hypertarget{classopencv__tracking_1_1track__ball_ad351c91525368a89ff0a7bb1d257b3d1}{}\label{classopencv__tracking_1_1track__ball_ad351c91525368a89ff0a7bb1d257b3d1}
+\index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!radius@{radius}}
+\index{radius@{radius}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{radius}{radius}}]{\setlength{\rightskip}{0pt plus 5cm}opencv\+\_\+tracking.\+track\+\_\+ball.\+radius}\hypertarget{classopencv__tracking_1_1track__ball_ae497b649948b1e33fb3cc71b01646da3}{}\label{classopencv__tracking_1_1track__ball_ae497b649948b1e33fb3cc71b01646da3}
+\index{opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}!vel\+\_\+pub@{vel\+\_\+pub}}
+\index{vel\+\_\+pub@{vel\+\_\+pub}!opencv\+\_\+tracking\+::track\+\_\+ball@{opencv\+\_\+tracking\+::track\+\_\+ball}}
+\subsubsection[{\texorpdfstring{vel\+\_\+pub}{vel_pub}}]{\setlength{\rightskip}{0pt plus 5cm}opencv\+\_\+tracking.\+track\+\_\+ball.\+vel\+\_\+pub}\hypertarget{classopencv__tracking_1_1track__ball_a09ab81e992a70d22568ed1f6c556d1bb}{}\label{classopencv__tracking_1_1track__ball_a09ab81e992a70d22568ed1f6c556d1bb}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/my\+\_\+ros/src/exp\+\_\+assignment2/scripts/\hyperlink{opencv__tracking_8py}{opencv\+\_\+tracking.\+py}\end{DoxyCompactItemize}
