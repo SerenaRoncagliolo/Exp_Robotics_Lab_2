@@ -21,38 +21,43 @@ from exp_assignment2.msg import PlanningAction, PlanningActionGoal
 act_c = None
 goalPos = PlanningActionGoal()
 
+## function get_random_position
+#
+# function to get a random position on the map to move the ball to
+def get_random_position():
+	# random position
+	randX = random.randint(-8, 8)
+ 	randY = random.randint(-8, 8)
+    	randZ = 0.5
+    	randPos = [randX, randY, randZ]
+	return randPos
 
 ## function make_disappear_ball()
 #
 # function to send command to make the ball disappear
 def make_disappear_ball():	
 	# random position
-	randX = random.randint(-7, 7)
- 	randY = random.randint(-7, 7)
-    	randZ = 0.5
-    	randPos = [randX, randY, randZ]
+    	randPos = get_random_position()
 
-	# set ball goal position under the map
+	# move the ball under the map
 	goalPos.goal.target_pose.pose.position.x = 0
 	goalPos.goal.target_pose.pose.position.y = 0
 	goalPos.goal.target_pose.pose.position.z = -1
 
-	# send ball position and wait that the goal is reached within 60 seconds
+	# send position and wait that the goal is reached within 60 seconds
 	act_c.send_goal(goalPos.goal)
 	act_c.wait_for_result(rospy.Duration.from_sec(60.0))
-
-
-
 
 ## function move_ball()
 #
 # function to make the ball moving 
 def move_ball():
 	# random position
-	randX = random.randint(-7, 7)
-    	randY = random.randint(-7, 7)
-    	randZ = 0.5
-    	randPos = [randX, randY, randZ]
+	#randX = random.randint(-7, 7)
+    	#randY = random.randint(-7, 7)
+    	#randZ = 0.5
+    	#randPos = [randX, randY, randZ]
+	randPos = get_random_position()
 
 	# set ball goal position 
 	goalPos.goal.target_pose.pose.position.x = randPos[0]
@@ -74,7 +79,8 @@ def main():
 	# init action client
 	global act_c
 	act_c = actionlib.SimpleActionClient('/ball/reaching_goal', PlanningAction)
-   	# wait for the initialization of the server
+   	
+	# wait for the initialization of the server
    	act_c.wait_for_server(rospy.Duration(5))
 	
 	while not rospy.is_shutdown():
@@ -84,6 +90,7 @@ def main():
 			make_disappear_ball()
 		else:
 			move_ball()
+
 		# wait some random time
 		rospy.sleep(random.randInt(7,10))
 
