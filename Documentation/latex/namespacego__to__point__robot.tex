@@ -12,9 +12,9 @@ def \hyperlink{namespacego__to__point__robot_a03165218d1637827cb202d3df2d5c782}{
 \begin{DoxyCompactList}\small\item\em function clbk\+\_\+odom \end{DoxyCompactList}\item 
 def \hyperlink{namespacego__to__point__robot_a7dc82840479105130238b2bad7f4e927}{change\+\_\+state} (state)
 \begin{DoxyCompactList}\small\item\em function change\+\_\+state \end{DoxyCompactList}\item 
-def \hyperlink{namespacego__to__point__robot_a74e6d464a6a13d4042475098b913c127}{normalize\+\_\+angle} (state)
+def \hyperlink{namespacego__to__point__robot_ae86d8ad9123b9ac0987b894814891c0e}{normalize\+\_\+angle} (angle)
 \begin{DoxyCompactList}\small\item\em function normalize\+\_\+angle \end{DoxyCompactList}\item 
-def \hyperlink{namespacego__to__point__robot_a7600c9d4397c4c8100d46e0b8f21d2a0}{yaw} (goal\+Position)
+def \hyperlink{namespacego__to__point__robot_a3eea0827fcd59a4b5e6d525ab88e12ea}{fix\+\_\+yaw} (goal\+Pos)
 \begin{DoxyCompactList}\small\item\em function yaw \end{DoxyCompactList}\item 
 def \hyperlink{namespacego__to__point__robot_a12132668e9be07f4bbaf7211864da3c7}{go\+\_\+straight\+\_\+ahead} (goal\+Pos)
 \begin{DoxyCompactList}\small\item\em function go\+\_\+straight\+\_\+ahead \end{DoxyCompactList}\item 
@@ -45,21 +45,19 @@ int \hyperlink{namespacego__to__point__robot_aadcca20dfdd8e843623186e6efde0481}{
 \item 
 float \hyperlink{namespacego__to__point__robot_adce474cb3bcc2782904a1e6129217a4c}{dist\+\_\+precision\+\_\+} = 0.\+1
 \item 
-float \hyperlink{namespacego__to__point__robot_ab9bae8b08a7c50f11e55e3fae44f7777}{kp\+\_\+a} = 3.\+0
+float \hyperlink{namespacego__to__point__robot_ab9bae8b08a7c50f11e55e3fae44f7777}{kp\+\_\+a} = -\/3.\+0
 \item 
-float \hyperlink{namespacego__to__point__robot_afaac446f10588cd97bfda3bf31c3b670}{kp\+\_\+d} = 0.\+5
+float \hyperlink{namespacego__to__point__robot_afaac446f10588cd97bfda3bf31c3b670}{kp\+\_\+d} = 0.\+2
 \item 
 float \hyperlink{namespacego__to__point__robot_a82aa92171409b5a766ecc7ec77f1488f}{ub\+\_\+a} = 0.\+6
 \item 
 float \hyperlink{namespacego__to__point__robot_a0a5daf54d4f98b8898f69fc331bcc1f0}{lb\+\_\+a} = -\/0.\+5
 \item 
-float \hyperlink{namespacego__to__point__robot_aa54f25328ab1ea2787c879431057298f}{ub\+\_\+d} = 2.\+0
-\item 
-float \hyperlink{namespacego__to__point__robot_aa3df6e395e3d2ee11f4f87c88bde46bb}{z\+\_\+back} = 0.\+25
+float \hyperlink{namespacego__to__point__robot_aa54f25328ab1ea2787c879431057298f}{ub\+\_\+d} = 0.\+6
 \item 
 \hyperlink{namespacego__to__point__robot_a6e68302a4efb615222a73c01f4ea514e}{pub} = None
 \item 
-\hyperlink{namespacego__to__point__robot_a77fda65f973b534ac0506f422d861fbc}{pub\+\_\+z} = None
+\hyperlink{namespacego__to__point__robot_ab0db118eb85d7bb034dfb80210d478be}{pubz} = None
 \item 
 \hyperlink{namespacego__to__point__robot_ab19ed2eba072e150275e059ca41a4cfc}{act\+\_\+s} = None
 \end{DoxyCompactItemize}
@@ -102,7 +100,18 @@ callback function dedicated to the odometry of the robot \index{go\+\_\+to\+\_\+
 
 function done 
 
-it set the robot velocities to zero \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!go\+\_\+straight\+\_\+ahead@{go\+\_\+straight\+\_\+ahead}}
+it set the robot velocities to zero \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!fix\+\_\+yaw@{fix\+\_\+yaw}}
+\index{fix\+\_\+yaw@{fix\+\_\+yaw}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
+\subsubsection[{\texorpdfstring{fix\+\_\+yaw(goal\+Pos)}{fix_yaw(goalPos)}}]{\setlength{\rightskip}{0pt plus 5cm}def go\+\_\+to\+\_\+point\+\_\+robot.\+fix\+\_\+yaw (
+\begin{DoxyParamCaption}
+\item[{}]{goal\+Pos}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacego__to__point__robot_a3eea0827fcd59a4b5e6d525ab88e12ea}{}\label{namespacego__to__point__robot_a3eea0827fcd59a4b5e6d525ab88e12ea}
+
+
+function yaw 
+
+fixes the yaw of the robot \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!go\+\_\+straight\+\_\+ahead@{go\+\_\+straight\+\_\+ahead}}
 \index{go\+\_\+straight\+\_\+ahead@{go\+\_\+straight\+\_\+ahead}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
 \subsubsection[{\texorpdfstring{go\+\_\+straight\+\_\+ahead(goal\+Pos)}{go_straight_ahead(goalPos)}}]{\setlength{\rightskip}{0pt plus 5cm}def go\+\_\+to\+\_\+point\+\_\+robot.\+go\+\_\+straight\+\_\+ahead (
 \begin{DoxyParamCaption}
@@ -126,11 +135,11 @@ function main
 
 \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!normalize\+\_\+angle@{normalize\+\_\+angle}}
 \index{normalize\+\_\+angle@{normalize\+\_\+angle}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
-\subsubsection[{\texorpdfstring{normalize\+\_\+angle(state)}{normalize_angle(state)}}]{\setlength{\rightskip}{0pt plus 5cm}def go\+\_\+to\+\_\+point\+\_\+robot.\+normalize\+\_\+angle (
+\subsubsection[{\texorpdfstring{normalize\+\_\+angle(angle)}{normalize_angle(angle)}}]{\setlength{\rightskip}{0pt plus 5cm}def go\+\_\+to\+\_\+point\+\_\+robot.\+normalize\+\_\+angle (
 \begin{DoxyParamCaption}
-\item[{}]{state}
+\item[{}]{angle}
 \end{DoxyParamCaption}
-)}\hypertarget{namespacego__to__point__robot_a74e6d464a6a13d4042475098b913c127}{}\label{namespacego__to__point__robot_a74e6d464a6a13d4042475098b913c127}
+)}\hypertarget{namespacego__to__point__robot_ae86d8ad9123b9ac0987b894814891c0e}{}\label{namespacego__to__point__robot_ae86d8ad9123b9ac0987b894814891c0e}
 
 
 function normalize\+\_\+angle 
@@ -146,18 +155,7 @@ function to normalize the robot angle \index{go\+\_\+to\+\_\+point\+\_\+robot@{g
 
 function planning 
 
-function which computes what the robot should do \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!yaw@{yaw}}
-\index{yaw@{yaw}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
-\subsubsection[{\texorpdfstring{yaw(goal\+Position)}{yaw(goalPosition)}}]{\setlength{\rightskip}{0pt plus 5cm}def go\+\_\+to\+\_\+point\+\_\+robot.\+yaw (
-\begin{DoxyParamCaption}
-\item[{}]{goal\+Position}
-\end{DoxyParamCaption}
-)}\hypertarget{namespacego__to__point__robot_a7600c9d4397c4c8100d46e0b8f21d2a0}{}\label{namespacego__to__point__robot_a7600c9d4397c4c8100d46e0b8f21d2a0}
-
-
-function yaw 
-
-function to set the yaw angle of the robot 
+function which computes what the robot should do 
 
 \subsection{Variable Documentation}
 \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!act\+\_\+s@{act\+\_\+s}}
@@ -171,10 +169,10 @@ function to set the yaw angle of the robot
 \subsubsection[{\texorpdfstring{dist\+\_\+precision\+\_\+}{dist_precision_}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+robot.\+dist\+\_\+precision\+\_\+ = 0.\+1}\hypertarget{namespacego__to__point__robot_adce474cb3bcc2782904a1e6129217a4c}{}\label{namespacego__to__point__robot_adce474cb3bcc2782904a1e6129217a4c}
 \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!kp\+\_\+a@{kp\+\_\+a}}
 \index{kp\+\_\+a@{kp\+\_\+a}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
-\subsubsection[{\texorpdfstring{kp\+\_\+a}{kp_a}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+robot.\+kp\+\_\+a = 3.\+0}\hypertarget{namespacego__to__point__robot_ab9bae8b08a7c50f11e55e3fae44f7777}{}\label{namespacego__to__point__robot_ab9bae8b08a7c50f11e55e3fae44f7777}
+\subsubsection[{\texorpdfstring{kp\+\_\+a}{kp_a}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+robot.\+kp\+\_\+a = -\/3.\+0}\hypertarget{namespacego__to__point__robot_ab9bae8b08a7c50f11e55e3fae44f7777}{}\label{namespacego__to__point__robot_ab9bae8b08a7c50f11e55e3fae44f7777}
 \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!kp\+\_\+d@{kp\+\_\+d}}
 \index{kp\+\_\+d@{kp\+\_\+d}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
-\subsubsection[{\texorpdfstring{kp\+\_\+d}{kp_d}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+robot.\+kp\+\_\+d = 0.\+5}\hypertarget{namespacego__to__point__robot_afaac446f10588cd97bfda3bf31c3b670}{}\label{namespacego__to__point__robot_afaac446f10588cd97bfda3bf31c3b670}
+\subsubsection[{\texorpdfstring{kp\+\_\+d}{kp_d}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+robot.\+kp\+\_\+d = 0.\+2}\hypertarget{namespacego__to__point__robot_afaac446f10588cd97bfda3bf31c3b670}{}\label{namespacego__to__point__robot_afaac446f10588cd97bfda3bf31c3b670}
 \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!lb\+\_\+a@{lb\+\_\+a}}
 \index{lb\+\_\+a@{lb\+\_\+a}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
 \subsubsection[{\texorpdfstring{lb\+\_\+a}{lb_a}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+robot.\+lb\+\_\+a = -\/0.\+5}\hypertarget{namespacego__to__point__robot_a0a5daf54d4f98b8898f69fc331bcc1f0}{}\label{namespacego__to__point__robot_a0a5daf54d4f98b8898f69fc331bcc1f0}
@@ -187,9 +185,9 @@ function to set the yaw angle of the robot
 \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!pub@{pub}}
 \index{pub@{pub}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
 \subsubsection[{\texorpdfstring{pub}{pub}}]{\setlength{\rightskip}{0pt plus 5cm}go\+\_\+to\+\_\+point\+\_\+robot.\+pub = None}\hypertarget{namespacego__to__point__robot_a6e68302a4efb615222a73c01f4ea514e}{}\label{namespacego__to__point__robot_a6e68302a4efb615222a73c01f4ea514e}
-\index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!pub\+\_\+z@{pub\+\_\+z}}
-\index{pub\+\_\+z@{pub\+\_\+z}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
-\subsubsection[{\texorpdfstring{pub\+\_\+z}{pub_z}}]{\setlength{\rightskip}{0pt plus 5cm}go\+\_\+to\+\_\+point\+\_\+robot.\+pub\+\_\+z = None}\hypertarget{namespacego__to__point__robot_a77fda65f973b534ac0506f422d861fbc}{}\label{namespacego__to__point__robot_a77fda65f973b534ac0506f422d861fbc}
+\index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!pubz@{pubz}}
+\index{pubz@{pubz}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
+\subsubsection[{\texorpdfstring{pubz}{pubz}}]{\setlength{\rightskip}{0pt plus 5cm}go\+\_\+to\+\_\+point\+\_\+robot.\+pubz = None}\hypertarget{namespacego__to__point__robot_ab0db118eb85d7bb034dfb80210d478be}{}\label{namespacego__to__point__robot_ab0db118eb85d7bb034dfb80210d478be}
 \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!state\+\_\+@{state\+\_\+}}
 \index{state\+\_\+@{state\+\_\+}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
 \subsubsection[{\texorpdfstring{state\+\_\+}{state_}}]{\setlength{\rightskip}{0pt plus 5cm}int go\+\_\+to\+\_\+point\+\_\+robot.\+state\+\_\+ = 0}\hypertarget{namespacego__to__point__robot_a68762504c0683adedb89a8f7d431f475}{}\label{namespacego__to__point__robot_a68762504c0683adedb89a8f7d431f475}
@@ -198,7 +196,7 @@ function to set the yaw angle of the robot
 \subsubsection[{\texorpdfstring{ub\+\_\+a}{ub_a}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+robot.\+ub\+\_\+a = 0.\+6}\hypertarget{namespacego__to__point__robot_a82aa92171409b5a766ecc7ec77f1488f}{}\label{namespacego__to__point__robot_a82aa92171409b5a766ecc7ec77f1488f}
 \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!ub\+\_\+d@{ub\+\_\+d}}
 \index{ub\+\_\+d@{ub\+\_\+d}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
-\subsubsection[{\texorpdfstring{ub\+\_\+d}{ub_d}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+robot.\+ub\+\_\+d = 2.\+0}\hypertarget{namespacego__to__point__robot_aa54f25328ab1ea2787c879431057298f}{}\label{namespacego__to__point__robot_aa54f25328ab1ea2787c879431057298f}
+\subsubsection[{\texorpdfstring{ub\+\_\+d}{ub_d}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+robot.\+ub\+\_\+d = 0.\+6}\hypertarget{namespacego__to__point__robot_aa54f25328ab1ea2787c879431057298f}{}\label{namespacego__to__point__robot_aa54f25328ab1ea2787c879431057298f}
 \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!yaw\+\_\+@{yaw\+\_\+}}
 \index{yaw\+\_\+@{yaw\+\_\+}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
 \subsubsection[{\texorpdfstring{yaw\+\_\+}{yaw_}}]{\setlength{\rightskip}{0pt plus 5cm}int go\+\_\+to\+\_\+point\+\_\+robot.\+yaw\+\_\+ = 0}\hypertarget{namespacego__to__point__robot_af0544cdffc791a807b9062c979cf0c3d}{}\label{namespacego__to__point__robot_af0544cdffc791a807b9062c979cf0c3d}
@@ -211,6 +209,3 @@ function to set the yaw angle of the robot
 \index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!z@{z}}
 \index{z@{z}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
 \subsubsection[{\texorpdfstring{z}{z}}]{\setlength{\rightskip}{0pt plus 5cm}go\+\_\+to\+\_\+point\+\_\+robot.\+z}\hypertarget{namespacego__to__point__robot_ad3b22a785c833ad2cdd10712a66f11c8}{}\label{namespacego__to__point__robot_ad3b22a785c833ad2cdd10712a66f11c8}
-\index{go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}!z\+\_\+back@{z\+\_\+back}}
-\index{z\+\_\+back@{z\+\_\+back}!go\+\_\+to\+\_\+point\+\_\+robot@{go\+\_\+to\+\_\+point\+\_\+robot}}
-\subsubsection[{\texorpdfstring{z\+\_\+back}{z_back}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+robot.\+z\+\_\+back = 0.\+25}\hypertarget{namespacego__to__point__robot_aa3df6e395e3d2ee11f4f87c88bde46bb}{}\label{namespacego__to__point__robot_aa3df6e395e3d2ee11f4f87c88bde46bb}

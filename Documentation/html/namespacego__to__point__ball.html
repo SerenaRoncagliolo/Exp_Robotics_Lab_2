@@ -88,6 +88,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">go_to_point_ball Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>implements an action server to move the ball on the map  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -128,7 +131,7 @@ Variables</h2></td></tr>
 <tr class="separator:a1985c69cf8534ba0bd2c6080f788a992"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a02c8ca89a09909111972ec4fd317ca"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacego__to__point__ball.html#a9a02c8ca89a09909111972ec4fd317ca">dist_precision_</a> = 0.1</td></tr>
 <tr class="separator:a9a02c8ca89a09909111972ec4fd317ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac67ecb6c41141092b1ccaba4b537afc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacego__to__point__ball.html#aac67ecb6c41141092b1ccaba4b537afc">kp_a</a> = 3.0</td></tr>
+<tr class="memitem:aac67ecb6c41141092b1ccaba4b537afc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacego__to__point__ball.html#aac67ecb6c41141092b1ccaba4b537afc">kp_a</a> = -3.0</td></tr>
 <tr class="separator:aac67ecb6c41141092b1ccaba4b537afc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb49969b88b7ca77d9abdeae42cb1964"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacego__to__point__ball.html#aeb49969b88b7ca77d9abdeae42cb1964">kp_d</a> = 0.5</td></tr>
 <tr class="separator:aeb49969b88b7ca77d9abdeae42cb1964"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,7 +139,7 @@ Variables</h2></td></tr>
 <tr class="separator:aa5173a26f3502ea035d7c563bbf1fb05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6440cb2a8ea6e8e7d2327cb4cd12dd3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacego__to__point__ball.html#ae6440cb2a8ea6e8e7d2327cb4cd12dd3">lb_a</a> = -0.5</td></tr>
 <tr class="separator:ae6440cb2a8ea6e8e7d2327cb4cd12dd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1dabe6f24f898fa6f5303959917de757"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacego__to__point__ball.html#a1dabe6f24f898fa6f5303959917de757">ub_d</a> = 2.0</td></tr>
+<tr class="memitem:a1dabe6f24f898fa6f5303959917de757"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacego__to__point__ball.html#a1dabe6f24f898fa6f5303959917de757">ub_d</a> = 0.8</td></tr>
 <tr class="separator:a1dabe6f24f898fa6f5303959917de757"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a176944c73499ce72fa754c7e1a6d138d"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacego__to__point__ball.html#a176944c73499ce72fa754c7e1a6d138d">z_back</a> = 0.25</td></tr>
 <tr class="separator:a176944c73499ce72fa754c7e1a6d138d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,7 +150,9 @@ Variables</h2></td></tr>
 <tr class="memitem:a9ac8c67ea55b320e5eb2bdf665173ffa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacego__to__point__ball.html#a9ac8c67ea55b320e5eb2bdf665173ffa">act_s</a> = None</td></tr>
 <tr class="separator:a9ac8c67ea55b320e5eb2bdf665173ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>implements an action server to move the ball on the map </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="ac5839fd3601d15749a1e1a28939b2c68"></a>
 <div class="memitem">
 <div class="memproto">
@@ -200,7 +205,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>function done </p>
-<p>it set the ball velocities to zero </p>
+<p>puts ball velocities to zero </p>
 
 </div>
 </div>
@@ -255,7 +260,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>function planning </p>
-<p>function which computes what the ball should do </p>
+<p>plans what the ball should do </p>
 
 </div>
 </div>
@@ -301,7 +306,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float go_to_point_ball.kp_a = 3.0</td>
+          <td class="memname">float go_to_point_ball.kp_a = -3.0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -409,7 +414,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float go_to_point_ball.ub_d = 2.0</td>
+          <td class="memname">float go_to_point_ball.ub_d = 0.8</td>
         </tr>
       </table>
 </div><div class="memdoc">

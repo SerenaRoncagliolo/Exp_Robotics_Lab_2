@@ -1,5 +1,10 @@
 \hypertarget{namespacego__to__point__ball}{}\section{go\+\_\+to\+\_\+point\+\_\+ball Namespace Reference}
 \label{namespacego__to__point__ball}\index{go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}}
+
+
+implements an action server to move the ball on the map  
+
+
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -34,7 +39,7 @@ int \hyperlink{namespacego__to__point__ball_a1985c69cf8534ba0bd2c6080f788a992}{y
 \item 
 float \hyperlink{namespacego__to__point__ball_a9a02c8ca89a09909111972ec4fd317ca}{dist\+\_\+precision\+\_\+} = 0.\+1
 \item 
-float \hyperlink{namespacego__to__point__ball_aac67ecb6c41141092b1ccaba4b537afc}{kp\+\_\+a} = 3.\+0
+float \hyperlink{namespacego__to__point__ball_aac67ecb6c41141092b1ccaba4b537afc}{kp\+\_\+a} = -\/3.\+0
 \item 
 float \hyperlink{namespacego__to__point__ball_aeb49969b88b7ca77d9abdeae42cb1964}{kp\+\_\+d} = 0.\+5
 \item 
@@ -42,7 +47,7 @@ float \hyperlink{namespacego__to__point__ball_aa5173a26f3502ea035d7c563bbf1fb05}
 \item 
 float \hyperlink{namespacego__to__point__ball_ae6440cb2a8ea6e8e7d2327cb4cd12dd3}{lb\+\_\+a} = -\/0.\+5
 \item 
-float \hyperlink{namespacego__to__point__ball_a1dabe6f24f898fa6f5303959917de757}{ub\+\_\+d} = 2.\+0
+float \hyperlink{namespacego__to__point__ball_a1dabe6f24f898fa6f5303959917de757}{ub\+\_\+d} = 0.\+8
 \item 
 float \hyperlink{namespacego__to__point__ball_a176944c73499ce72fa754c7e1a6d138d}{z\+\_\+back} = 0.\+25
 \item 
@@ -53,6 +58,9 @@ float \hyperlink{namespacego__to__point__ball_a176944c73499ce72fa754c7e1a6d138d}
 \hyperlink{namespacego__to__point__ball_a9ac8c67ea55b320e5eb2bdf665173ffa}{act\+\_\+s} = None
 \end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+implements an action server to move the ball on the map 
 
 \subsection{Function Documentation}
 \index{go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}!change\+\_\+state@{change\+\_\+state}}
@@ -88,7 +96,7 @@ callback function dedicated to the odometry of the robot \index{go\+\_\+to\+\_\+
 
 function done 
 
-it set the ball velocities to zero \index{go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}!go\+\_\+straight\+\_\+ahead@{go\+\_\+straight\+\_\+ahead}}
+puts ball velocities to zero \index{go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}!go\+\_\+straight\+\_\+ahead@{go\+\_\+straight\+\_\+ahead}}
 \index{go\+\_\+straight\+\_\+ahead@{go\+\_\+straight\+\_\+ahead}!go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}}
 \subsubsection[{\texorpdfstring{go\+\_\+straight\+\_\+ahead(des\+\_\+pos)}{go_straight_ahead(des_pos)}}]{\setlength{\rightskip}{0pt plus 5cm}def go\+\_\+to\+\_\+point\+\_\+ball.\+go\+\_\+straight\+\_\+ahead (
 \begin{DoxyParamCaption}
@@ -121,7 +129,7 @@ function main
 
 function planning 
 
-function which computes what the ball should do 
+plans what the ball should do 
 
 \subsection{Variable Documentation}
 \index{go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}!act\+\_\+s@{act\+\_\+s}}
@@ -135,7 +143,7 @@ function which computes what the ball should do
 \subsubsection[{\texorpdfstring{dist\+\_\+precision\+\_\+}{dist_precision_}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+ball.\+dist\+\_\+precision\+\_\+ = 0.\+1}\hypertarget{namespacego__to__point__ball_a9a02c8ca89a09909111972ec4fd317ca}{}\label{namespacego__to__point__ball_a9a02c8ca89a09909111972ec4fd317ca}
 \index{go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}!kp\+\_\+a@{kp\+\_\+a}}
 \index{kp\+\_\+a@{kp\+\_\+a}!go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}}
-\subsubsection[{\texorpdfstring{kp\+\_\+a}{kp_a}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+ball.\+kp\+\_\+a = 3.\+0}\hypertarget{namespacego__to__point__ball_aac67ecb6c41141092b1ccaba4b537afc}{}\label{namespacego__to__point__ball_aac67ecb6c41141092b1ccaba4b537afc}
+\subsubsection[{\texorpdfstring{kp\+\_\+a}{kp_a}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+ball.\+kp\+\_\+a = -\/3.\+0}\hypertarget{namespacego__to__point__ball_aac67ecb6c41141092b1ccaba4b537afc}{}\label{namespacego__to__point__ball_aac67ecb6c41141092b1ccaba4b537afc}
 \index{go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}!kp\+\_\+d@{kp\+\_\+d}}
 \index{kp\+\_\+d@{kp\+\_\+d}!go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}}
 \subsubsection[{\texorpdfstring{kp\+\_\+d}{kp_d}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+ball.\+kp\+\_\+d = 0.\+5}\hypertarget{namespacego__to__point__ball_aeb49969b88b7ca77d9abdeae42cb1964}{}\label{namespacego__to__point__ball_aeb49969b88b7ca77d9abdeae42cb1964}
@@ -162,7 +170,7 @@ function which computes what the ball should do
 \subsubsection[{\texorpdfstring{ub\+\_\+a}{ub_a}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+ball.\+ub\+\_\+a = 0.\+6}\hypertarget{namespacego__to__point__ball_aa5173a26f3502ea035d7c563bbf1fb05}{}\label{namespacego__to__point__ball_aa5173a26f3502ea035d7c563bbf1fb05}
 \index{go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}!ub\+\_\+d@{ub\+\_\+d}}
 \index{ub\+\_\+d@{ub\+\_\+d}!go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}}
-\subsubsection[{\texorpdfstring{ub\+\_\+d}{ub_d}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+ball.\+ub\+\_\+d = 2.\+0}\hypertarget{namespacego__to__point__ball_a1dabe6f24f898fa6f5303959917de757}{}\label{namespacego__to__point__ball_a1dabe6f24f898fa6f5303959917de757}
+\subsubsection[{\texorpdfstring{ub\+\_\+d}{ub_d}}]{\setlength{\rightskip}{0pt plus 5cm}float go\+\_\+to\+\_\+point\+\_\+ball.\+ub\+\_\+d = 0.\+8}\hypertarget{namespacego__to__point__ball_a1dabe6f24f898fa6f5303959917de757}{}\label{namespacego__to__point__ball_a1dabe6f24f898fa6f5303959917de757}
 \index{go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}!yaw\+\_\+@{yaw\+\_\+}}
 \index{yaw\+\_\+@{yaw\+\_\+}!go\+\_\+to\+\_\+point\+\_\+ball@{go\+\_\+to\+\_\+point\+\_\+ball}}
 \subsubsection[{\texorpdfstring{yaw\+\_\+}{yaw_}}]{\setlength{\rightskip}{0pt plus 5cm}int go\+\_\+to\+\_\+point\+\_\+ball.\+yaw\+\_\+ = 0}\hypertarget{namespacego__to__point__ball_a74d8ca28c507d35baf1ea8e8f9595a78}{}\label{namespacego__to__point__ball_a74d8ca28c507d35baf1ea8e8f9595a78}

@@ -25,11 +25,11 @@ goalPos = PlanningActionGoal()
 #
 # function to get a random position on the map to move the ball to
 def get_random_position():
-    randX = random.randint(-8, 8)
-    randY = random.randint(-8, 8)
-    randZ = 0.5
-    randPos = [randX, randY, randZ]
-    return randPos
+	randX = random.randint(-8, 8)
+	randY = random.randint(-8, 8)
+	randZ = 0.5
+	randPos = [randX, randY, randZ]
+	return randPos
 
 ## function move_ball()
 #
@@ -42,21 +42,21 @@ def move_ball():
 	#randPos = [randX, randY, randZ]
 	randPos = get_random_position()
 
-    # set ball goal position 
-    goal_pos.goal.target_pose.pose.position.x = randPos[0]
-    goal_pos.goal.target_pose.pose.position.y = randPos[1]
-    goal_pos.goal.target_pose.pose.position.z = randPos[2]
+    	# set ball goal position 
+   	goalPos.goal.target_pose.pose.position.x = randPos[0]
+    	goalPos.goal.target_pose.pose.position.y = randPos[1]
+    	goalPos.goal.target_pose.pose.position.z = randPos[2]
 
-    # send ball position and wait that the goal is reached within 60 seconds
-    act_c.send_goal(goalPos.goal)
-    act_c.wait_for_result(rospy.Duration.from_sec(60.0))
+    	# send ball position and wait that the goal is reached within 60 seconds
+    	act_c.send_goal(goalPos.goal)
+    	act_c.wait_for_result(rospy.Duration.from_sec(60.0))
 
 ## function make_disappear_ball()
 #
 # function to send command to make the ball disappear
 def make_disappear_ball():	
 	# random position
-    randPos = get_random_position()
+    	randPos = get_random_position()
 
 	# move the ball under the map
 	goalPos.goal.target_pose.pose.position.x = 0

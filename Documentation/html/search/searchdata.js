@@ -4,7 +4,7 @@ var indexSectionsWithContent =
   1: "npst",
   2: "bghmo",
   3: "bghmo",
-  4: "_bcdefgmnpry",
+  4: "_bcdefgmnpr",
   5: "abcdghklnprsuvyz"
 };
 
