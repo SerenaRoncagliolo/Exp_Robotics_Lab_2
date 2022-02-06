@@ -199,15 +199,20 @@ def move_head():
 	# move the head in one direction 45 deg
 	# wait random time
 	angleHead = Float64()
-	head_angle.data = angleStart
-	pubHeadPos.publish(head_angle)
-	rospy.sleep(randint(3,6))
+	angleHead.data = angleStart
+	pubHeadPos.publish(angleHead)
+	rospy.sleep(randint(3,6)) # wait some seconds
 
 	# move the head in the opposite direction 45 deg
-	head_angle = Float64()
-	head_angle.data = -angleStart
-	pubHeadPos.publish(head_angle)
-	rospy.sleep(randint(3,6))
+	angleHead = Float64()
+	angleHead.data = -angleStart
+	pubHeadPos.publish(angleHead)
+	rospy.sleep(randint(3,6)) # wait some seconds
+	
+	# move the head in default direction 
+	angleHead = Float64()
+	angleHead.data = 0
+	pubHeadPos.publish(angleHead)
 
 ## function main
 #

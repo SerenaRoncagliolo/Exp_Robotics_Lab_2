@@ -86,7 +86,7 @@ def move_random_normal():
     	rospy.loginfo("NODE MOTION: the goal position was sent, it corresponds to:")
     	rospy.loginfo(goalPos.goal.target_pose.pose.position)
 	# wait for some time
-    	act_c.wait_for_result(rospy.Duration.from_sec(60.0))
+    	act_c.wait_for_result(rospy.Duration.from_sec(50.0))
     	
 
 ## function move_sleep_position
@@ -106,14 +106,14 @@ def move_sleep_position():
 	rospy.loginfo(goalPos.goal.target_pose.pose.position)
 	act_c.wait_for_result(rospy.Duration.from_sec(60.0))
 	rospy.loginfo("NODE MOTION: robot has reached goal position")
-	at_home = True
+	home_reached = True
 
 ## main function
 #
 def main():
 	## initialize node
 	rospy.init_node('motion')
-	rate = rospy.Rate(20)
+	
 	global at_home # boolean to check if robot at home or not
 	global act_c # goal position to reach 
 	
@@ -123,10 +123,10 @@ def main():
 	rospy.Subscriber("/behavior", String, callback_get_behaviour)		
 
 	# initialize action client
-	act_c = actionlib.SimpleActionClient('/robot/reach_goal', PlanningAction)
+	act_c = actionlib.SimpleActionClient('/robot/reaching_goal', PlanningAction)
 	
 	# wait for the initialization of the server for some seconds
-    	act_c.wait_for_server(rospy.Duration(8))
+    	act_c.wait_for_server(rospy.Duration(10))
 
 	## move according to the behaviour
 	while not rospy.is_shutdown():			
