@@ -11,7 +11,7 @@
 import rospy
 import smach
 import smach_ros
-import time
+#import time
 import random
 
 from std_msgs.msg import String # needed for subscribing strings

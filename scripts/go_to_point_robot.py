@@ -9,7 +9,7 @@ import rospy
 from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist, Point, Pose
 from nav_msgs.msg import Odometry
-from gazebo_msgs.msg import LinkState
+#from gazebo_msgs.msg import LinkState
 from tf import transformations
 import math
 import actionlib
@@ -29,12 +29,12 @@ desired_position_.z = 0 # stop
 yaw_precision_ = math.pi / 9  # +/- 20 degree allowed
 yaw_precision_2_ = math.pi / 90  # +/- 2 degree allowed
 dist_precision_ = 0.1
-kp_a = 3.0
-kp_d = 0.5
+kp_a = -3.0
+kp_d = 0.2
 ub_a = 0.6
 lb_a = -0.5
-ub_d = 2.0
-z_back = 0.25
+ub_d = 0.6
+#z_back = 0.25
 
 # publisher
 pub = None
@@ -144,8 +144,9 @@ def go_straight_ahead(goalPos):
 def done():
     twist_msg = Twist()
     twist_msg.linear.x = 0
-    twist_msg.linear.y = 0
-    pub.publish(twist_msg)
+    #twist_msg.linear.y = 0
+    twist_msg.angular.y = 0
+	pub.publish(twist_msg)
 
 ## function planning
 #
@@ -173,17 +174,15 @@ def planning(goal):
     	        success = False
     	        break
         elif state_ == 0:
-    	        feedback.stat = "ACTION SERVER ROBOT: Fix yaw angle"
+    	        feedback.stat = "Fixing the yaw"
     	        feedback.position = pose_
     	        act_s.publish_feedback(feedback)
     	        fix_yaw(desired_position_)
         elif state_ == 1:
-    	        feedback.stat = "Target reached!"
+    	        feedback.stat = "Angle aligned"
     	        feedback.position = pose_
     	        act_s.publish_feedback(feedback)
-		go_straight_ahead(desired_position_)
-    	        done()
-    	        break
+				go_straight_ahead(desired_position_)
 	elif state_ == 2:
 		feedback.stat = "Target reached!"
     	        feedback.position = pose_
@@ -201,14 +200,13 @@ def planning(goal):
 #
 def main():
     # variables
-    global pub, active_, act_s, pubz
+    global pub, act_s
 
     rospy.init_node('go_to_point_robot')
     pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
-    pubz = rospy.Publisher('/gazebo/set_link_state', LinkState, queue_size=1)
-    sub_odom = rospy.Subscriber('odom', Odometry, clbk_odom)
-    act_s = actionlib.SimpleActionServer(
-        '/reaching_goal', exp_assignment2.msg.PlanningAction, planning, auto_start=False)
+    
+	sub_odom = rospy.Subscriber('odom', Odometry, clbk_odom)
+    act_s = actionlib.SimpleActionServer('/reaching_goal', exp_assignment2.msg.PlanningAction, planning, auto_start=False)
     act_s.start()
 
     rate = rospy.Rate(20)

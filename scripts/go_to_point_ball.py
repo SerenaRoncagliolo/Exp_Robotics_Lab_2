@@ -23,11 +23,11 @@ desired_position_ = Point()
 yaw_precision_ = math.pi / 9  # +/- 20 degree allowed
 yaw_precision_2_ = math.pi / 90  # +/- 2 degree allowed
 dist_precision_ = 0.1
-kp_a = 3.0
+kp_a = -3.0
 kp_d = 0.5
 ub_a = 0.6
 lb_a = -0.5
-ub_d = 2.0
+ub_d = 0.8
 z_back = 0.25
 
 # publisher
@@ -159,9 +159,9 @@ def main():
     pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
     pubz = rospy.Publisher('/gazebo/set_link_state', LinkState, queue_size=1)
     sub_odom = rospy.Subscriber('odom', Odometry, clbk_odom)
-    act_s = actionlib.SimpleActionServer(
-        '/reaching_goal', exp_assignment2.msg.PlanningAction, planning, auto_start=False)
-    act_s.start()
+	
+    act_s = actionlib.SimpleActionServer( '/reaching_goal', exp_assignment2.msg.PlanningAction, planning, auto_start=False)
+	act_s.start()
 
     rate = rospy.Rate(20)
 
