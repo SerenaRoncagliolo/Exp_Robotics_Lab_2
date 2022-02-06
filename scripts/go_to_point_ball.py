@@ -1,5 +1,10 @@
 #! /usr/bin/env python
-# import ros stuff
+
+## @package go_to_point_ball
+#
+# implements an action server to move the ball on the map
+
+# import from ros
 import rospy
 from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist, Point, Pose
@@ -57,7 +62,7 @@ def clbk_odom(msg):
 def change_state(state):
 	global state_
 	state_ = state
-	print ('State changed to [%s]' % state_)
+	print ('ACTION SERVER BALL: State changed to [%s]' % state_)
 
 ## function go_straight_ahead
 #
@@ -154,7 +159,7 @@ def main():
 	# variables
 	global pub, active_, act_s, pubz
 
-	rospy.init_node('go_to_point')
+	rospy.init_node('go_to_point_ball')
 	pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
 	pubz = rospy.Publisher('/gazebo/set_link_state', LinkState, queue_size=1)
 	sub_odom = rospy.Subscriber('odom', Odometry, clbk_odom)
