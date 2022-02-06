@@ -49,7 +49,7 @@ class Normal_behavior(smach.State):
 		# initialize boolean for checking voice command received or not	
 		self.ball_visible = False 
 		 # Loop 100Hz
-		self.rate = rospy.Rate(1) 
+		self.rate = rospy.Rate(20) 
 
 	## method execute
 	#
@@ -189,6 +189,9 @@ class Play_behavior(smach.State):
                     			return 'stop_play'
 			elif(self.ball_visible):
 				self.counter = 0
+	
+			# keep looping
+			self.rate.sleep()
 				
 	## method read_ball_detection
 	#
@@ -228,5 +231,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+	main()
 

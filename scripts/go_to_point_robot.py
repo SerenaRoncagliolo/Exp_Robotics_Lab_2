@@ -178,14 +178,14 @@ def planning(goal):
     	        act_s.publish_feedback(feedback)
     	        fix_yaw(desired_position_)
         elif state_ == 1:
-    	        feedback.stat = "Target reached!"
+    	        feedback.stat = "Target position reached"
     	        feedback.position = pose_
     	        act_s.publish_feedback(feedback)
 		go_straight_ahead(desired_position_)
     	        done()
     	        break
 	elif state_ == 2:
-		feedback.stat = "Target reached!"
+		feedback.stat = "Target position reached"!"
     	        feedback.position = pose_
     	        act_s.publish_feedback(feedback)
     	        done()
