@@ -71,17 +71,17 @@ def clbk_odom(msg):
 #
 # function which changes the state while the robot moves until it reaches the goal
 def change_state(state):
-    global state_
-    state_ = state
-    print ('ACTION SERVER ROBOT: State changed to [%s]' % state_)
+	global state_
+	state_ = state
+	print ('ACTION SERVER ROBOT: State changed to [%s]' % state_)
 
 ## function normalize_angle
 #
 # function to normalize the robot angle
 def normalize_angle(state):
-    if(math.fabs(angle) > math.pi):
-	# normalization
-	angleNormal = angle - (2*math.pi * angle) / (math.fabs(angle))
+	if(math.fabs(angle) > math.pi):
+		# normalization
+		angleNormal = angle - (2*math.pi * angle) / (math.fabs(angle))
 	return angleNormal
 
 ## function yaw
@@ -142,78 +142,77 @@ def go_straight_ahead(goalPos):
 #
 # it set the robot velocities to zero
 def done():
-    twist_msg = Twist()
-    twist_msg.linear.x = 0
-    #twist_msg.linear.y = 0
-    twist_msg.angular.y = 0
+	twist_msg = Twist()
+	twist_msg.linear.x = 0
+	#twist_msg.linear.y = 0
+	twist_msg.angular.z = 0
 	pub.publish(twist_msg)
 
 ## function planning
 #
 # function which computes what the robot should do
 def planning(goal):
+	global state_, desired_position_
+	global act_s
 
-    global state_, desired_position_
-    global act_s
-
-    desired_position_.x = goal.target_pose.pose.position.x
-    desired_position_.y = goal.target_pose.pose.position.y
+	desired_position_.x = goal.target_pose.pose.position.x
+	desired_position_.y = goal.target_pose.pose.position.y
 
 
-    state_ = 0
-    rate = rospy.Rate(20)
-    success = True
+	state_ = 0
+   	rate = rospy.Rate(20)
+	success = True
 
-    feedback = exp_assignment2.msg.PlanningFeedback()
-    result = exp_assignment2.msg.PlanningResult()
+	feedback = exp_assignment2.msg.PlanningFeedback()
+	result = exp_assignment2.msg.PlanningResult()
 
-    while not rospy.is_shutdown():
-    	if act_s.is_preempt_requested():
-        	rospy.loginfo('ACTION SERVER ROBOT: Goal was preempted')
-    	        act_s.set_preempted()
-    	        success = False
-    	        break
-        elif state_ == 0:
-    	        feedback.stat = "Fixing the yaw"
-    	        feedback.position = pose_
-    	        act_s.publish_feedback(feedback)
-    	        fix_yaw(desired_position_)
-        elif state_ == 1:
-    	        feedback.stat = "Angle aligned"
-    	        feedback.position = pose_
-    	        act_s.publish_feedback(feedback)
-				go_straight_ahead(desired_position_)
-	elif state_ == 2:
-		feedback.stat = "Target reached!"
-    	        feedback.position = pose_
-    	        act_s.publish_feedback(feedback)
-    	        done()
-    	        break
-        else:
-    	        rospy.logerr('ACTION SERVER ROBOT: Unknown state!')
-        rate.sleep()
-    if success:
-        rospy.loginfo('ACTION SERVER ROBOT: Goal reached successfully')
-        act_s.set_succeeded(result)
+	while not rospy.is_shutdown():
+    		if act_s.is_preempt_requested():
+			rospy.loginfo('ACTION SERVER ROBOT: Goal was preempted')
+	    	        act_s.set_preempted()
+	    	        success = False
+    	        	break
+        	elif state_ == 0:
+	    	        feedback.stat = "Fixing the yaw"
+	    	        feedback.position = pose_
+	    	        act_s.publish_feedback(feedback)
+	    	        fix_yaw(desired_position_)
+		elif state_ == 1:
+	    	        feedback.stat = "Angle aligned"
+	    	        feedback.position = pose_
+	    	        act_s.publish_feedback(feedback)
+			go_straight_ahead(desired_position_)
+		elif state_ == 2:
+			feedback.stat = "Target reached!"
+	    	        feedback.position = pose_
+	    	        act_s.publish_feedback(feedback)
+	    	        done()
+	    	        break
+        	else:
+    	        	rospy.logerr('ACTION SERVER ROBOT: Unknown state!')
+        	rate.sleep()
+	if success:
+	        rospy.loginfo('ACTION SERVER ROBOT: Goal reached successfully')
+	        act_s.set_succeeded(result)
 
 ## function main
 #
 def main():
-    # variables
-    global pub, act_s
+	# variables
+	global pub, act_s
 
-    rospy.init_node('go_to_point_robot')
-    pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
+    	rospy.init_node('go_to_point_robot')
+    	pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
     
 	sub_odom = rospy.Subscriber('odom', Odometry, clbk_odom)
-    act_s = actionlib.SimpleActionServer('/reaching_goal', exp_assignment2.msg.PlanningAction, planning, auto_start=False)
-    act_s.start()
+    	act_s = actionlib.SimpleActionServer('/reaching_goal', exp_assignment2.msg.PlanningAction, planning, auto_start=False)
+    	act_s.start()
 
-    rate = rospy.Rate(20)
+    	rate = rospy.Rate(20)
 
-    while not rospy.is_shutdown():
-        rate.sleep()
+    	while not rospy.is_shutdown():
+        	rate.sleep()
 
 
 if __name__ == '__main__':
-    main()
+	main()
