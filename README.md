@@ -106,15 +106,15 @@ This component publishes the robot behavior as a ROS message on the topic /behav
 **ROS Actions** have a client-to-server communication relationship with a specified protocol. The actions use ROS topics to send goal messages from a client to the server. They are implemented in ROS using the **actionlib** package. This allows a request/reply interaction between two nodes, the action client and the action server, that communicate via a ROS Action Protocol, which is built on top of ROS messages. The client and server then provide a simple API for users to request goals (on the client side) or to execute goals (on the server side) via function calls and callbacks.
 <p align="center">
 <a>
-    <img src="images/expserver.png" width="600" height="">
+    <img src="images/expserver.png" width="400" height="">
 </a>
 </p>
 Like ROS services, actions are defined in text files and they contain the following information:
-* _Goal:_ request sent by the action client to the action server, like "move the robot joint of 45 degrees";
-* _Cancel:_ used to send cancel request to the server
-* _Status:_ used to notify the client on the current state of every goal in the system
-* _Feedback:_ feedback information used by the action server to the action client while the request is being processed, such as the current value of the joint being moved.
-* _Result:_ final information sent by the action server to the action client once the request has been fulfilled
+  * Goal: request sent by the action client to the action server, like "move the robot joint of 45 degrees";
+  * Cancel: used to send cancel request to the server
+  * Status: used to notify the client on the current state of every goal in the system
+  * Feedback: feedback information used by the action server to the action client while the request is being processed, such as the current value of the joint being moved.
+  * Result: final information sent by the action server to the action client once the request has been fulfilled
 
 * **Go To Point Robot:** it receives a goal position from the motion component and it publish the robot velocity to the /robot/cmd_vel topic to move the robot in Gazebo. When the robot has reached the given goal position, it sends back a feedback message to the Motion component. This action server can performs the following: 
   * adjust the yaw angle of the robot so hat it can reach the given position correctly
