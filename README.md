@@ -191,7 +191,7 @@ As shown in the UML graph or the system architecture, the system make use of the
 
 <p align="center">
 <a>
-    <img src="images/rqt.png" width="600" height="">
+    <img src="images/rqt.PNG" width="600" height="">
 </a>
 </p>
 
