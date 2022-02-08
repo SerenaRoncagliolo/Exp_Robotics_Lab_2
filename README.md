@@ -98,7 +98,7 @@ In our project, we use ROS_Control which consists of a set of packages for contr
 
 <p align="center">
 <a>
-    <img src="images/draft_architecture.png" width="600" height="">
+    <img src="images/draft_architecture.PNG" width="600" height="">
 </a>
 </p>
 
@@ -143,7 +143,7 @@ In particular, we have implemented the followint action servers:ù
 ### Differences with previous lab
 <p align="center">
 <a>
-    <img src="images/exp12.png" width="600" height="">
+    <img src="images/exp12.png" width="800" height="">
 </a>
 </p>
 
