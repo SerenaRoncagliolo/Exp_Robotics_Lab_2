@@ -98,7 +98,7 @@ In our project, we use ROS_Control which consists of a set of packages for contr
 
 <p align="center">
 <a>
-    <img src="images/draft_architecture.PNG" width="600" height="">
+    <img src="images/draft_architecture.png" width="600" height="">
 </a>
 </p>
 
