@@ -189,6 +189,12 @@ As shown in the UML graph or the system architecture, the system make use of the
 
 ### Rqt_graphs 
 
+<p align="center">
+<a>
+    <img src="images/rqt.png" width="600" height="">
+</a>
+</p>
+
 ## Repository Organization
 The repository contains the following folders:
 
@@ -230,11 +236,12 @@ It is necessary to install ros control plugin using the commands:
  $ sudo apt-get install ros-kinetic-gazebo-ros-pkgs ros-kinetic-gazebo-ros-control
  ```
  ### OpenCV library
- Install using:
+ Install **OpenCV** library using:
   ```sh
   $ sudo apt-get install python-opencv
  ```
 ### numpy library
+Install **numpy** library using the following:
   ```sh
   $ pip install numpy
   ```
@@ -252,15 +259,14 @@ This instructions assumes that you have installed **catkin**, if not it is neces
   2. Rename it the repository exp_assignment2
   3. Enter the repository at the top level and run
    ```sh
-   catkin_make
-   source devel/setup.bash
+    $ catkin_make
+    $ source devel/setup.bash
    ```
    4. Enter the following to start the program:
-     ```sh
-   $ roslaunch exp_assignment2 gazebo_world.launch
-   $ roslaunch exp_assignment2 pet_beaviour.launch 
-   ```
-   
+   ```sh
+    $ roslaunch exp_assignment2 gazebo_world.launch
+    $ roslaunch exp_assignment2 pet_beaviour.launch
+   ``` 
 
 ## Working hypothesis and environment
 
