@@ -37,18 +37,18 @@ at_home = False
 #
 # get a random position given x and y coordinates
 def get_random_position():
-    randX = random.randint(-7, 7) # x coordinate
-    randY = random.randint(-7, 7) # y coordinate
+    randX = random.randint(-8, 8) # x coordinate
+    randY = random.randint(-8, 8) # y coordinate
     randPos = [randX, randY]
     return randPos
 
 ## function callback_get_behavior
 #
 # subscriber callback to the behaviour topic
-def callback_get_behaviour(data):
+def callback_get_behaviour(state):
 	#rospy.loginfo('NODE MOTION: Executing callback behavior')
 	global behaviour 
-	behaviour = data.data
+	behaviour = state.data
 
 ## function feedback_cb
 #
@@ -113,7 +113,7 @@ def move_sleep_position():
 def main():
 	## initialize node
 	rospy.init_node('motion')
-	
+	rate = rospy.Rate(20)
 	global at_home # boolean to check if robot at home or not
 	global act_c # goal position to reach 
 	
@@ -131,7 +131,7 @@ def main():
 	## move according to the behaviour
 	while not rospy.is_shutdown():			
 		# check robot behavior
-		if(behaviour == "sleep"):
+		if behaviour == "sleep":
 			## the robot moves to predefined location
 			# call function move_sleep_position()
 			if not at_home:
@@ -141,8 +141,9 @@ def main():
 		else:
 			# not in goal
 			at_home = False
-			move_random_normal()
-			rospy.sleep(1)
+			if behaviour == "normal";
+				move_random_normal()
+				rospy.sleep(1)
 	
 
 if __name__ == "__main__":

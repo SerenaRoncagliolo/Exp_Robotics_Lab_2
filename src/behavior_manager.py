@@ -49,7 +49,7 @@ class Normal_behavior(smach.State):
 		# initialize boolean for checking voice command received or not	
 		self.ball_visible = False 
 		 # Loop 100Hz
-		self.rate = rospy.Rate(1) 
+		self.rate = rospy.Rate(20) 
 
 	## method execute
 	#
@@ -75,15 +75,16 @@ class Normal_behavior(smach.State):
 			
 			## compute how long the robot stays in Normal state 
 			if seconds_counter == 1: 
-				current_time = rospy.Time.now()
+				start_time = rospy.Time.now()
 			seconds_counter += 1
 			current_time = rospy.Time.now()
 			# compute how long it stays in normal time
 			tot_time_given = current_time.secs - start_time.secs	
+			
 			if(self.ball_visible):
 				## the robot sees the ball it should enter Play behavior
 				return 'start_play'
-			elif(random.randint(1,100) == 1 and tot_time_given > 30):
+			elif(random.randint(1,1000) == 1 and tot_time_given > 30):
 				## the robot goes to sleep at random time
 				return 'start_sleep'
 			self.rate.sleep()				
@@ -190,6 +191,7 @@ class Play_behavior(smach.State):
 			elif(self.ball_visible):
 				self.counter = 0
 				
+			self.rate.sleep()
 	## method read_ball_detection
 	#
 	# subscriber callback to find the ball 
