@@ -14,7 +14,7 @@ from tf import transformations
 import math
 import actionlib
 import actionlib.msg
-import exp_assignment2.msg
+from assignment2.msg import Planning_ballAction, Planning_ballGoal, Planning_ballResult, Planning_ballFeedback
 
 # robot state variables
 position_ = Point()
@@ -28,11 +28,11 @@ desired_position_ = Point()
 yaw_precision_ = math.pi / 9  # +/- 20 degree allowed
 yaw_precision_2_ = math.pi / 90  # +/- 2 degree allowed
 dist_precision_ = 0.1
-kp_a = -3.0
+kp_a = 3.0
 kp_d = 0.5
 ub_a = 0.6
 lb_a = -0.5
-ub_d = 0.8
+ub_d = 2.0
 z_back = 0.25
 
 # publisher
@@ -62,7 +62,7 @@ def clbk_odom(msg):
 def change_state(state):
     global state_
     state_ = state
-    print ('ACTION SERVER BALL: state changed to [%s]' % state_)
+    print ('*** BALL Action Server: state changed to [%s]' % state_)
 
 ## function go_straight_ahead
 #
@@ -126,12 +126,12 @@ def planning(goal):
     rate = rospy.Rate(20)
     success = True
 
-    feedback = exp_assignment2.msg.PlanningFeedback()
-    result = exp_assignment2.msg.PlanningResult()
+    feedback = Planning_ballFeedback()
+    result = Planning_ballResult()
 
     while not rospy.is_shutdown():
         if act_s.is_preempt_requested():
-            rospy.loginfo('Goal was preempted')
+            rospy.loginfo('*** BALL Action Server: Goal was preempted')
             act_s.set_preempted()
             success = False
             break
@@ -147,22 +147,24 @@ def planning(goal):
             done()
             break
         else:
-            rospy.logerr('Unknown state!')
+            rospy.logerr('*** BALL Action Server: Unknown state!')
 
         rate.sleep()
     if success:
-        rospy.loginfo('Ball goal: Succeeded!')
+        rospy.loginfo('*** BALL Action Server: Ball goal succeeded!')
         act_s.set_succeeded(result)
 
 ## function main
 #
 def main():
-    global pub, act_s, pubz
-    rospy.init_node('go_to_point_ball')
+    global pub, active_, act_s, pubz
+    rospy.init_node('go_to_point')
     pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
     pubz = rospy.Publisher('/gazebo/set_link_state', LinkState, queue_size=1)
     sub_odom = rospy.Subscriber('odom', Odometry, clbk_odom)
-    act_s = actionlib.SimpleActionServer('reaching_goal', exp_assignment2.msg.PlanningAction, planning, auto_start=False)
+    
+    act_s = actionlib.SimpleActionServer(
+        'reaching_goal', Planning_ballAction, planning, auto_start=False)
     act_s.start()
 
     rate = rospy.Rate(20)

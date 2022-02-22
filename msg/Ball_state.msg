@@ -1,0 +1,3 @@
+bool ballVisible
+bool atBall
+
