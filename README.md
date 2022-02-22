@@ -93,6 +93,23 @@ URDF is an XML file format used in ROS to describe all elements of a robot. In t
 To interact with the simulation environment, we use ROS plugins which can be used to add functionalities for simulation purposes, such as controlling the robot mode or adding sensors like cameras.
 In our project, we use ROS_Control which consists of a set of packages for controller interface, controller manager, transmissions, hardware interfaces and control toolbox. It can be used to control the joint actuators of the robot.
 
+### State Machine
+
+<p align="center">
+<a>
+    <img src="images/State_Machine.png" width="400" height="">
+</a>
+</p>
+
+The wheeled dog has three behaviors:
+
+* NORMAL BEHAVIOR: when the robot assumes this behavior, it starts moving randomly within the environment. The robot goes from the normal behavior to the play behavior when he sees the ball within the environment. Otherwise, when it is moving, the sleep timer is activated and the robot should assume SLEEP behavior;
+* SLEEP BEHAVIOR: the robot moves to a predefined position which indicates "home position" and stops there for a given time interval. After a certain time, it should "wake up" and assume NORMAL behavior; </li>
+* PLAY BEHAVIOR: 
+    * It starts following the ball; </li>
+    * when the ball stops, it moves the head to the left of 45 degrees, it keeps the head in that position for a number of seconds, then it moves the head on the right, it keeps it there for a number of seconds, then again it moves it to the center.
+    *  Once it moved the head, it keeps tracking the ball until it stops again.
+    *  The robot goes back in the normal behavior when it cannot find the ball for a certain amount of time.
 
 ### Components Architecture
 
@@ -103,12 +120,12 @@ In our project, we use ROS_Control which consists of a set of packages for contr
 </p>
 
 **Components**  
-* **Behavior Command Manager:** this component simulate the Finite State Machine (FSM) and control the switching between the three robot behaviors (Normal, Sleep, Play) described in details in the section _**State Machine**_. The component subscribed to two topics:
-  * /ball_visible topic: it tells the component if the ball is visible or not in the camera range of the robot, in this case the roboto should switch to Play behavior, in which it starts "playing" with the ball by following it around;
-  * /at_home topic: when the robot receives the command to go to sleep, it is supposed to reach first a given position, defined as "home position". If it has reached it, the motion robot publish it on the topic /at_home, which is subscribed by the behavior manager to check if the robot can enter sleep behaviour
-This component publishes the robot behavior as a ROS message on the topic /behavior depending on the subscribed data received.
-* **Motion:** this component moves the robot when it assumes Normal or Sleep behavior. To get information regarding the current behavior of the robot, it subscribes to the /behaviour topic and moves the robot accordingly. The motion component also instantiate a SimpleActionClient that is used to communicate with the _Go To Point Robot_ Action Server. This is done to set the correct goal position. When the robot is in Normal state, the motion component makes it move randomly within the environment, by choosing a random goal position and waits for the Server to report back as feedback information if it has reached the goal or not. in the Sleep state, instead, the motion controller moves the robot to _home position_ and when it's reached, it report it back to the Behavior Controller.
-* **OpenCv Ball Tracking:** it make use of the OpenCv library to detect the ball. [_OpenCV_](https://opencv.org/) is a library used for real-time computer vision. ROS can be interfaced to OpenCV by using [CvBridge](http://wiki.ros.org/cv_bridge) and [convert ROS images](cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython - ROS Wiki) into OpenCv images, or viceversa. This library is used to determine if the ball is contained in robot camera range or not. This component subscribes to the robot camera topic given by _/robot/camera1/image_raw/compressed_. Once the ball is detected, it publishes on the _/ball_visible_ topic: this way the behavior controller can switch the behavior from Normal to Play. When the robot switch to Play behavior, this component also pushlishes the robot velocity on the topic _/robot/cmd_vel_. This velocity is then applied to the model in Gazebo. Furthermore, the robot stops when the ball stops. When this happens, the tracking is stopped as well, the robot moves its head, first toward right and then left and returns the head to the center. It then starts following or tracking the ball again, depending on the ball position.
+* **Behavior Command Manager:** this component simulate the Finite State Machine (FSM) and control the switching between the three robot behaviors (Normal, Sleep, Play) described in details in the section _**State Machine**_. It is also responsible to move the robot head when in front of the ball
+* **OpenCv Tracking:** it make use of the OpenCv library to detect the ball. [_OpenCV_](https://opencv.org/) is a library used for real-time computer vision. ROS can be interfaced to OpenCV by using [CvBridge](http://wiki.ros.org/cv_bridge) and [convert ROS images](cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython - ROS Wiki) into OpenCv images, or viceversa. This library is used to determine if the ball is contained in robot camera range or not. This component subscribes to the robot camera topic given by _/robot/camera1/image_raw/compressed_. 
+  * Once the ball is detected, it cokmmunicates with Behavior manager using the parameter _ballVisible_ of the custom message _ballstate_. This way the behavior controller can switch the behavior from Normal to Play. 
+  * When the robot switch to Play behavior, this component also pushlishes the robot velocity on the topic _/cmd_vel_. This velocity is then applied to the model in Gazebo. Furthermore, the robot stops when the ball stops. 
+  * When this happens, the tracking is stopped as well, and opencCV communicate with _Behavior Manager_, which is responsible for making the robot move its head, first toward right and then left and returns the head to the center. 
+  * Once it has moved the head, a message is sent over the topic _head_state_ which is subscribed by OpenCV tracking. Then the robot starts following or tracking the ball again, depending on the ball position.
 * **Human Interface Simulator:** this component is used to simulate a human moving the ball within the gazebo environment. To do so, it sends a goal positions to the ball, using a SimpleActionClient which stops once the goal is reached. Once the command is sends, this components stops sending commannds for a random number of seconds so that the ball can remain still for a certain time to let the robot track it and reach it. This node can send a goal position to the ball or make it disappear by moving it underground.
 
 ### Action Servers
@@ -144,32 +161,13 @@ In particular, we have implemented the followint action servers:ù
 </p>
 
 
-### State Machine
-
-<p align="center">
-<a>
-    <img src="images/State_Machine.png" width="400" height="">
-</a>
-</p>
-
-The wheeled dog has three behaviors:
-
-* NORMAL BEHAVIOR: when the robot assumes this behavior, it starts moving randomly within the environment. The robot goes from the normal behavior to the play behavior when he sees the ball within the environment. Otherwise, when it is moving, the sleep timer is activated and the robot should assume SLEEP behavior;
-* SLEEP BEHAVIOR: the robot moves to a predefined position which indicates "home position" and stops there for a given time interval. After a certain time, it should "wake up" and assume NORMAL behavior; </li>
-* PLAY BEHAVIOR: 
-    * It starts following the ball; </li>
-    * when the ball stops, it moves the head to the left of 45 degrees, it keeps the head in that position for a number of seconds, then it moves the head on the right, it keeps it there for a number of seconds, then again it moves it to the center.
-    *  Once it moved the head, it keeps tracking the ball until it stops again.
-    *  The robot goes back in the normal behavior when it cannot find the ball for a certain amount of time.
-
 ### ROS Topics
 As shown in the UML graph or the system architecture, the system make use of the following topics:
-* /behavior: this topic is subscribed by the OpenCV Tracking and Motion components to read the current behavior of the robot. It is used by the Behavior Manager component to publish the state of the robot as a String
-* /at_home: this topic is subscribed by the behavior manager to check if the robot has reached or not home position, so that it can switch to sleep behavior. It is used by motion to publish this condition as a boolean
-* /ball_visible: topic subscribed by Behavior manager to check if the ball is inside the visual range of the robot or not. It is pusblish by the OpenCV tracking component using a boolean
-* /robot/camera: topic subscribed by the OpenCV tracking component to get the ROS image and convert it in OpenCv image. 
-* /robot/cmd_vel: topic published by the OpenCV tracking component to set the robot velocity in Gazebo. This topic is also published by the Go To Point Robot Action server 
+* /cmd_vel: topic published by the OpenCV tracking component to set the robot velocity in Gazebo. This topic is also published by the Go To Point Robot Action server 
 * /robot/odom: topic used to get by the robot odometry from Gazebo simulator. It is subscribed by the Go to Point Robot Action server
+* /robot/camera1/compressed_image: topic over which camera information is sent
+* /head_state: used to tell OpenCv tracking if the robot has finished moving its head and can go back trackin the ball
+* /ball_state: used to tell Behavior manager if the robot is in front of the ball and it can move its head or not
 * /robot/reaching_goal: set of topics used by the action server Go to Point Robot and defined by:
   * /result
   * /status
@@ -201,6 +199,7 @@ The repository contains the following folders:
 * **launch**: contains two launch files:
   *  gazebo_world.launch: it launch the gazebo world contained the simulation model of the robot, human and ball
   *  pet_behavior.launch: it starts the behaviour architecure of the project
+* **msg**: contains the ball_state.msg and head_state.msg custom messages
 * **scripts**: it contains the python ROS nodes which implement two action server to move the ball and the robot:
   *  go_to_point_ball.py
   *  go_to_point_robot.py
