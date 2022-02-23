@@ -153,13 +153,6 @@ In particular, we have implemented the followint action servers:ù
   *  movement towards a goal position as if it was given by the user 
   *  command to stop when the goal is reached.
 
-### Differences with previous lab
-<p align="center">
-<a>
-    <img src="images/exp12.png" width="800" height="">
-</a>
-</p>
-
 
 ### ROS Topics
 As shown in the UML graph or the system architecture, the system make use of the following topics:
