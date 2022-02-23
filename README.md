@@ -251,7 +251,7 @@ This instructions assumes that you have installed **catkin**, if not it is neces
    ```sh
    git clone https://github.com/SerenaRoncagliolo/Exp_Robotics_Lab_2.git
    ```
-  2. Rename it the repository exp_assignment2
+  2. Rename the cloned package as _assignment2_
   3. Enter the repository at the top level and run
    ```sh
     $ catkin_make
@@ -259,8 +259,7 @@ This instructions assumes that you have installed **catkin**, if not it is neces
    ```
    4. Enter the following to start the program:
    ```sh
-    $ roslaunch exp_assignment2 gazebo_world.launch
-    $ roslaunch exp_assignment2 pet_beaviour.launch
+    $ roslaunch assignment2 pet_beaviour.launch
    ``` 
 
 ## Working hypothesis and environment
