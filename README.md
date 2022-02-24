@@ -189,8 +189,7 @@ The repository contains the following folders:
 * **action**: it contains the definition of the action message used by the two action servers
 * **config**: contains configuration file related to the Ros control plugin
 * **images**: contains .png images used in the README:md file
-* **launch**: contains two launch files:
-  *  gazebo_world.launch: it launch the gazebo world contained the simulation model of the robot, human and ball
+* **launch**: contains launch file:
   *  pet_behavior.launch: it starts the behaviour architecure of the project
 * **msg**: contains the ball_state.msg and head_state.msg custom messages
 * **scripts**: it contains the python ROS nodes which implement two action server to move the ball and the robot:
@@ -199,7 +198,6 @@ The repository contains the following folders:
 * **src**: contains the relative script of the main components of the architecture:
   *  behavior_manager.py
   *  human_simulator.py
-  *  motion.py
   *  opencv_tracking.py
 * * **urdf**: it contains the description of a robot model, a human and a ball;
 * **worlds**: it contains the world used for implementing the simulation;
