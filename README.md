@@ -255,7 +255,8 @@ This instructions assumes that you have installed **catkin**, if not it is neces
 
 ### Systems features and limitations
 
-**insert video**
+* **Case 1**: Robot is moving normally and it detects the ball, starting following -> [video](https://web.microsoftstream.com/video/6ac40e18-aa04-4dde-8356-dac2f946a499)
+* **Case 2**: the ball is not visible, robot moves randomly in normal state, it detect the ball and enters play state -> [video](https://web.microsoftstream.com/video/fb8dfb36-9bcf-46db-a742-4b921472b172)
 
 The velocity of the ball was set after performing different tests and see how the system behaved. Initially the velocity of the ball was too high and the robot was losing sight of it while following it. Therefore we lowered the maximum velocity of the ball in the Action Server and increased a bit the velocity of the robot during the ball tracking. The robot speed still needs some improvements, since it may happen that if the ball moves at full speed towards the robot, it may overturn when trying to avoid it.
 Another limitiation is the fixed neck of the robot when moving in normal state. The camera range is reduced and make it more difficult to detect the ball quickly
