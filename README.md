@@ -253,13 +253,16 @@ This instructions assumes that you have installed **catkin**, if not it is neces
     $ roslaunch assignment2 pet_beaviour.launch
    ``` 
 
-## Working hypothesis and environment
+### Systems features and limitations
 
-### Systems features
+**insert video**
 
-### Systems limitations
-
-### Future work
+The velocity of the ball was set after performing different tests and see how the system behaved. Initially the velocity of the ball was too high and the robot was losing sight of it while following it. Therefore we lowered the maximum velocity of the ball in the Action Server and increased a bit the velocity of the robot during the ball tracking. The robot speed still needs some improvements, since it may happen that if the ball moves at full speed towards the robot, it may overturn when trying to avoid it.
+Another limitiation is the fixed neck of the robot when moving in normal state. The camera range is reduced and make it more difficult to detect the ball quickly
+Some improvements can be:
+* use a more realistic model
+* add a system for obstacle avoidance
+* implement a feature to move the robot's neck and expand the camera range when moving in normal mode
 
 <!-- CONTACT -->
 ## Contact
