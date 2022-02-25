@@ -107,7 +107,7 @@ The wheeled dog has three behaviors:
 * SLEEP BEHAVIOR: the robot moves to a predefined position which indicates "home position" and stops there for a given time interval. After a certain time, it should "wake up" and assume NORMAL behavior; </li>
 * PLAY BEHAVIOR: 
     * It starts following the ball; </li>
-    * when the ball stops, it moves the head to the left of 45 degrees, it keeps the head in that position for a number of seconds, then it moves the head on the right, it keeps it there for a number of seconds, then again it moves it to the center.
+    * when the ball stops, it moves the head to the left of 45 degrees, then to the right, it keeps it there for a number of seconds, then again it moves it to the center.
     *  Once it moved the head, it keeps tracking the ball until it stops again.
     *  The robot goes back in the normal behavior when it cannot find the ball for a certain amount of time.
 
@@ -120,11 +120,11 @@ The wheeled dog has three behaviors:
 </p>
 
 **Components**  
-* **Behavior Command Manager:** this component simulate the Finite State Machine (FSM) and control the switching between the three robot behaviors (Normal, Sleep, Play) described in details in the section _**State Machine**_. It is also responsible to move the robot head when in front of the ball
+* **Behavior Command Manager:** this component simulates the Finite State Machine (FSM) and controls the switching between the three robot behaviors (Normal, Sleep, Play) described in details in the section _**State Machine**_. It is also responsible to move the robot head when in front of the ball
 * **OpenCv Tracking:** it make use of the OpenCv library to detect the ball. [_OpenCV_](https://opencv.org/) is a library used for real-time computer vision. ROS can be interfaced to OpenCV by using [CvBridge](http://wiki.ros.org/cv_bridge) and [convert ROS images](cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython - ROS Wiki) into OpenCv images, or viceversa. This library is used to determine if the ball is contained in robot camera range or not. This component subscribes to the robot camera topic given by _/robot/camera1/image_raw/compressed_. 
-  * Once the ball is detected, it cokmmunicates with Behavior manager using the parameter _ballVisible_ of the custom message _ballstate_. This way the behavior controller can switch the behavior from Normal to Play. 
+  * Once the ball is detected, it communicates with Behavior manager using the parameter _ballVisible_ of the custom message _ballstate_. This way the behavior controller can switch the behavior from Normal to Play. 
   * When the robot switch to Play behavior, this component also pushlishes the robot velocity on the topic _/cmd_vel_. This velocity is then applied to the model in Gazebo. Furthermore, the robot stops when the ball stops. 
-  * When this happens, the tracking is stopped as well, and opencCV communicate with _Behavior Manager_, which is responsible for making the robot move its head, first toward right and then left and returns the head to the center. 
+  * When this happens, the tracking is stopped as well, and opencCV communicates with _Behavior Manager_, which is responsible for making the robot move its head, first toward right and then left and returns the head to the center. 
   * Once it has moved the head, a message is sent over the topic _head_state_ which is subscribed by OpenCV tracking. Then the robot starts following or tracking the ball again, depending on the ball position.
 * **Human Interface Simulator:** this component is used to simulate a human moving the ball within the gazebo environment. To do so, it sends a goal positions to the ball, using a SimpleActionClient which stops once the goal is reached. Once the command is sends, this components stops sending commannds for a random number of seconds so that the ball can remain still for a certain time to let the robot track it and reach it. This node can send a goal position to the ball or make it disappear by moving it underground.
 
@@ -143,12 +143,12 @@ Like ROS services, actions are defined in text files and they contain the follow
 * Feedback: feedback information used by the action server to the action client while the request is being processed, such as the current value of the joint being moved.
 * Result: final information sent by the action server to the action client once the request has been fulfilled
 
-In particular, we have implemented the followint action servers:ù
+In particular, we have implemented the following action servers:
 
-* **Go To Point Robot:** it receives a goal position from the motion component and it publish the robot velocity to the /robot/cmd_vel topic to move the robot in Gazebo. When the robot has reached the given goal position, it sends back a feedback message to the Motion component. This action server can performs the following: 
+* **Go To Point Robot:** it receives a goal position from the motion component and it publishes the robot velocity to the /robot/cmd_vel topic to move the robot in Gazebo. When the robot has reached the given goal position, it sends back a feedback message to the Behavior Manager component. This action server can performs the following: 
   * adjust the yaw angle of the robot so hat it can reach the given position correctly
   * move the robot in a straight direction
-  * stop then robot when it reach the is reached.
+  * stop then robot when its goal is reached.
 * **Go To Point Ball:**  this action server controls the ball movements instead of the ones of the robot. It controls the the linear velocity of the ball along the three axis and in this case there is no need to fix or compute the yaw. This action server can performs the following:
   *  movement towards a goal position as if it was given by the user 
   *  command to stop when the goal is reached.
