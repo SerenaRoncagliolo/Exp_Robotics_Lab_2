@@ -259,6 +259,7 @@ To show the system functioning:
 
 * **Case 1**: in this [video](https://web.microsoftstream.com/video/6ac40e18-aa04-4dde-8356-dac2f946a499) the robot is moving normally and it detects the ball, starting following it
 * **Case 2**: in this [video](https://web.microsoftstream.com/video/fb8dfb36-9bcf-46db-a742-4b921472b172) the ball is not visible, the robot moves randomly in normal state. Once it detects the ball and enters play state
+
 The velocity of the ball was set after performing different tests and see how the system was behaving in those situations. Initially the velocity of the ball was too high and the robot was losing sight of it while following it. Therefore we lowered the maximum velocity of the ball in the Action Server and increased a bit the velocity of the robot during the ball tracking. The robot speed still needs some improvements, since it may happen that if the ball moves at full speed towards the robot, it may overturn when trying to avoid it.
 Another limitiation is the fixed neck of the robot when moving in normal state. The camera range is reduced and make it more difficult to detect the ball quickly
 Some improvements can be:
